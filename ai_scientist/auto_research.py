@@ -27,8 +27,17 @@ def build_hypothesis_record(
 
 
 def rank_hypotheses(records: Iterable[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    """Sort records by score descending (missing score treated as -inf)."""
-    return sorted(records, key=lambda r: r.get("score", float("-inf")), reverse=True)
+    """Sort records by score descending, then by timestamp ascending, then by name ascending.
+    Missing score treated as -inf. Ensures deterministic ordering across runs.
+    """
+    return sorted(
+        records,
+        key=lambda r: (
+            -r.get("score", float("-inf")),
+            r.get("timestamp", ""),
+            r.get("name", ""),
+        ),
+    )
 
 
 def append_hypothesis_record(jsonl_path: Path, record: Dict[str, Any]) -> None:
