@@ -3,6 +3,13 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List
 
 
+def _require_non_empty_string(value: Any, field_name: str) -> str:
+    """Return a stripped string or raise ValueError when required metadata is missing."""
+    if not isinstance(value, str) or not value.strip():
+        raise ValueError(f"{field_name} is required")
+    return value.strip()
+
+
 def build_hypothesis_record(
     idea: Dict[str, Any],
     success: bool,
@@ -10,18 +17,18 @@ def build_hypothesis_record(
     run_path: str,
     timestamp: str,
 ) -> Dict[str, Any]:
-    """Normalize an idea dict into a persisted hypothesis record."""
+    """Normalize an idea dict into a persisted hypothesis record with minimal validation."""
     return {
-        "name": idea.get("Name"),
+        "name": _require_non_empty_string(idea.get("Name"), "Name"),
         "title": idea.get("Title"),
-        "hypothesis": idea.get("Experiment"),
+        "hypothesis": _require_non_empty_string(idea.get("Experiment"), "Experiment"),
         "novel": bool(idea.get("novel", False)),
         "interestingness": idea.get("Interestingness"),
         "feasibility": idea.get("Feasibility"),
         "novelty": idea.get("Novelty"),
         "score": float(score),
         "success": bool(success),
-        "run_path": run_path,
+        "run_path": _require_non_empty_string(run_path, "run_path"),
         "timestamp": timestamp,
     }
 
