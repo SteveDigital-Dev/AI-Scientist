@@ -10,6 +10,19 @@ def _require_non_empty_string(value: Any, field_name: str) -> str:
     return value.strip()
 
 
+def _normalize_optional_score(value: Any, field_name: str) -> float | None:
+    """Normalize optional idea metadata scores to floats in the expected 1-10 range."""
+    if value is None:
+        return None
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        raise ValueError(f"{field_name} must be a number between 1 and 10")
+
+    normalized = float(value)
+    if not 1.0 <= normalized <= 10.0:
+        raise ValueError(f"{field_name} must be a number between 1 and 10")
+    return normalized
+
+
 def build_hypothesis_record(
     idea: Dict[str, Any],
     success: bool,
@@ -23,9 +36,9 @@ def build_hypothesis_record(
         "title": idea.get("Title"),
         "hypothesis": _require_non_empty_string(idea.get("Experiment"), "Experiment"),
         "novel": bool(idea.get("novel", False)),
-        "interestingness": idea.get("Interestingness"),
-        "feasibility": idea.get("Feasibility"),
-        "novelty": idea.get("Novelty"),
+        "interestingness": _normalize_optional_score(idea.get("Interestingness"), "Interestingness"),
+        "feasibility": _normalize_optional_score(idea.get("Feasibility"), "Feasibility"),
+        "novelty": _normalize_optional_score(idea.get("Novelty"), "Novelty"),
         "score": float(score),
         "success": bool(success),
         "run_path": _require_non_empty_string(run_path, "run_path"),
