@@ -52,6 +52,10 @@ def main() -> int:
         action="store_false",
         help="re-discover tests for every trial",
     )
+    parser.add_argument(
+        "--output",
+        help="optional path to write the JSON benchmark payload",
+    )
     args = parser.parse_args()
 
     discovered_suite = None
@@ -86,22 +90,25 @@ def main() -> int:
         "--reuse-discovery" if args.reuse_discovery else "--no-reuse-discovery",
     ]
 
-    print(
-        json.dumps(
-            {
-                "command": " ".join(command),
-                "start_dir": args.start_dir,
-                "pattern": args.pattern,
-                "reuse_discovery": args.reuse_discovery,
-                "trials": trials,
-                "avg_seconds": avg_seconds,
-                "stdev_seconds": stdev_seconds,
-                "pass_rate": pass_rate,
-                "error_rate": error_rate,
-            },
-            indent=2,
-        )
-    )
+    payload = {
+        "command": " ".join(command),
+        "start_dir": args.start_dir,
+        "pattern": args.pattern,
+        "reuse_discovery": args.reuse_discovery,
+        "trials": trials,
+        "avg_seconds": avg_seconds,
+        "stdev_seconds": stdev_seconds,
+        "pass_rate": pass_rate,
+        "error_rate": error_rate,
+    }
+    rendered = json.dumps(payload, indent=2)
+
+    if args.output:
+        output_path = Path(args.output)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text(rendered + "\n", encoding="utf-8")
+
+    print(rendered)
     return 0 if pass_rate == 1.0 else 1
 
 
