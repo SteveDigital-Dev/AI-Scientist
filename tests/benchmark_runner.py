@@ -33,7 +33,7 @@ def run_once(start_dir: str, pattern: str, discovered_suite=None) -> tuple[bool,
     return success, seconds
 
 
-def main() -> int:
+def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Run lightweight in-process benchmark trials.")
     parser.add_argument("--start-dir", default="tests", help="unittest discover start directory")
     parser.add_argument("--pattern", default="test_auto_research.py", help="unittest discover pattern")
@@ -56,7 +56,12 @@ def main() -> int:
         "--output",
         help="optional path to write the JSON benchmark payload",
     )
-    args = parser.parse_args()
+    return parser
+
+
+def main(argv: list[str] | None = None, stdout=None) -> int:
+    parser = build_parser()
+    args = parser.parse_args(argv)
 
     discovered_suite = None
     if args.reuse_discovery:
@@ -108,7 +113,7 @@ def main() -> int:
         output_path.parent.mkdir(parents=True, exist_ok=True)
         output_path.write_text(rendered + "\n", encoding="utf-8")
 
-    print(rendered)
+    print(rendered, file=stdout or sys.stdout)
     return 0 if pass_rate == 1.0 else 1
 
 
