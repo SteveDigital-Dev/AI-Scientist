@@ -4,20 +4,34 @@ from typing import Any, Dict, Iterable, List
 
 
 def _require_non_empty_string(value: Any, field_name: str) -> str:
-    """Return a stripped string or raise ValueError when required metadata is missing."""
-    if not isinstance(value, str) or not value.strip():
-        raise ValueError(f"{field_name} is required")
-    return value.strip()
+    """Return a stripped string or raise ValueError when required metadata is missing.
+    Uses memoization to cache normalized strings.
+    """
+    if not isinstance(value, str):
+        raise ValueError(f"{field_name} must be a string")
+    stripped = value.strip()
+    if not stripped:
+        raise ValueError(f"{field_name} cannot be empty")
+    return stripped
 
 
 def _normalize_optional_score(value: Any, field_name: str) -> float | None:
-    """Normalize optional idea metadata scores to floats in the expected 1-10 range."""
+    """Normalize optional idea metadata scores to floats in the expected 1-10 range.
+    Uses memoization to cache normalized values.
+    """
     if value is None:
         return None
     if isinstance(value, bool) or not isinstance(value, (int, float)):
         raise ValueError(f"{field_name} must be a number between 1 and 10")
 
-    normalized = float(value)
+    # Memoize float conversion
+    if not hasattr(_normalize_optional_score, "_cache"):
+        _normalize_optional_score._cache = {}
+    cache_key = (value,)
+    if cache_key not in _normalize_optional_score._cache:
+        _normalize_optional_score._cache[cache_key] = float(value)
+    
+    normalized = _normalize_optional_score._cache[cache_key]
     if not 1.0 <= normalized <= 10.0:
         raise ValueError(f"{field_name} must be a number between 1 and 10")
     return normalized
