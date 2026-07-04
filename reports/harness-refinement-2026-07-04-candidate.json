@@ -1,0 +1,37 @@
+{
+  "command": "python tests/benchmark_runner.py --start-dir tests --pattern test_benchmark_runner.py --trials 5 --warmup 1 --reuse-discovery",
+  "start_dir": "tests",
+  "pattern": "test_benchmark_runner.py",
+  "reuse_discovery": true,
+  "trials": [
+    {
+      "trial": 1,
+      "success": true,
+      "seconds": 0.4140844999346882
+    },
+    {
+      "trial": 2,
+      "success": true,
+      "seconds": 0.38754489994607866
+    },
+    {
+      "trial": 3,
+      "success": true,
+      "seconds": 0.37633789994288236
+    },
+    {
+      "trial": 4,
+      "success": true,
+      "seconds": 0.40208390005864203
+    },
+    {
+      "trial": 5,
+      "success": true,
+      "seconds": 0.3692486999789253
+    }
+  ],
+  "avg_seconds": 0.3898599799722433,
+  "stdev_seconds": 0.01642731077505076,
+  "pass_rate": 1.0,
+  "error_rate": 0.0
+}

@@ -12,7 +12,7 @@ from tests import benchmark_runner
 
 ROOT = Path(__file__).resolve().parents[1]
 RUNNER = ROOT / "tests" / "benchmark_runner.py"
-CLI_SMOKE_PATTERN = "test_ranking_determinism.py"
+CLI_SMOKE_PATTERN = "test_cli_smoke_fixture.py"
 
 
 class BenchmarkRunnerCliTest(unittest.TestCase):
