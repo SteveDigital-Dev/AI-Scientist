@@ -12,6 +12,7 @@ from tests import benchmark_runner
 
 ROOT = Path(__file__).resolve().parents[1]
 RUNNER = ROOT / "tests" / "benchmark_runner.py"
+CLI_SMOKE_PATTERN = "test_ranking_determinism.py"
 
 
 class BenchmarkRunnerCliTest(unittest.TestCase):
@@ -24,7 +25,7 @@ class BenchmarkRunnerCliTest(unittest.TestCase):
                 "--start-dir",
                 "tests",
                 "--pattern",
-                "test_auto_research.py",
+                CLI_SMOKE_PATTERN,
                 "--trials",
                 "1",
                 "--warmup",
@@ -40,7 +41,7 @@ class BenchmarkRunnerCliTest(unittest.TestCase):
             self.assertTrue(output_path.exists())
 
             payload = json.loads(output_path.read_text(encoding="utf-8"))
-            self.assertEqual(payload["pattern"], "test_auto_research.py")
+            self.assertEqual(payload["pattern"], CLI_SMOKE_PATTERN)
             self.assertEqual(payload["pass_rate"], 1.0)
 
     def test_output_file_matches_stdout_payload(self):
@@ -54,7 +55,7 @@ class BenchmarkRunnerCliTest(unittest.TestCase):
                         "--start-dir",
                         "tests",
                         "--pattern",
-                        "test_auto_research.py",
+                        CLI_SMOKE_PATTERN,
                         "--trials",
                         "1",
                         "--warmup",
