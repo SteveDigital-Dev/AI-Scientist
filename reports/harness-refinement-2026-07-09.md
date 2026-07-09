@@ -81,7 +81,7 @@ Reason: the candidate produced a measurable improvement in the fixed benchmark, 
 
 ## Final State
 - Candidate left applied in the repository
-- Small reversible commit created for the code change and today’s report artifacts
+- Small reversible commit created for the code change and today's report artifacts
 
 ## Files Touched
 - `tests/benchmark_runner.py`
