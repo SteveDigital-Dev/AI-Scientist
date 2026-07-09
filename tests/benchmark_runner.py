@@ -79,7 +79,10 @@ def main(argv: list[str] | None = None, stdout=None) -> int:
     pass_rate = sum(1 for t in trials if t["success"]) / len(trials)
     error_rate = 1.0 - pass_rate
     avg_seconds = statistics.mean(t["seconds"] for t in trials)
+    median_seconds = statistics.median(t["seconds"] for t in trials)
     stdev_seconds = statistics.pstdev(t["seconds"] for t in trials)
+    min_seconds = min(t["seconds"] for t in trials)
+    max_seconds = max(t["seconds"] for t in trials)
 
     command = [
         "python",
@@ -102,7 +105,10 @@ def main(argv: list[str] | None = None, stdout=None) -> int:
         "reuse_discovery": args.reuse_discovery,
         "trials": trials,
         "avg_seconds": avg_seconds,
+        "median_seconds": median_seconds,
         "stdev_seconds": stdev_seconds,
+        "min_seconds": min_seconds,
+        "max_seconds": max_seconds,
         "pass_rate": pass_rate,
         "error_rate": error_rate,
     }

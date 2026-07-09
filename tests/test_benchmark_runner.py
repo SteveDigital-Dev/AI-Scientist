@@ -73,6 +73,34 @@ class BenchmarkRunnerCliTest(unittest.TestCase):
             file_payload = json.loads(output_path.read_text(encoding="utf-8"))
             self.assertEqual(file_payload, stdout_payload)
 
+    def test_output_includes_latency_summary_fields(self):
+        stdout = io.StringIO()
+
+        exit_code = benchmark_runner.main(
+            [
+                "--start-dir",
+                "tests",
+                "--pattern",
+                CLI_SMOKE_PATTERN,
+                "--trials",
+                "1",
+                "--warmup",
+                "0",
+                "--reuse-discovery",
+            ],
+            stdout=stdout,
+        )
+
+        self.assertEqual(exit_code, 0)
+
+        payload = json.loads(stdout.getvalue())
+        self.assertIn("median_seconds", payload)
+        self.assertIn("min_seconds", payload)
+        self.assertIn("max_seconds", payload)
+        self.assertEqual(payload["median_seconds"], payload["avg_seconds"])
+        self.assertEqual(payload["min_seconds"], payload["avg_seconds"])
+        self.assertEqual(payload["max_seconds"], payload["avg_seconds"])
+
 
 if __name__ == "__main__":
     unittest.main()
