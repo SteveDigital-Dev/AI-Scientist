@@ -97,9 +97,18 @@ class BenchmarkRunnerCliTest(unittest.TestCase):
         self.assertIn("median_seconds", payload)
         self.assertIn("min_seconds", payload)
         self.assertIn("max_seconds", payload)
+        self.assertIn("p95_seconds", payload)
         self.assertEqual(payload["median_seconds"], payload["avg_seconds"])
         self.assertEqual(payload["min_seconds"], payload["avg_seconds"])
         self.assertEqual(payload["max_seconds"], payload["avg_seconds"])
+        self.assertEqual(payload["p95_seconds"], payload["avg_seconds"])
+
+    def test_nearest_rank_percentile_uses_tail_trial(self):
+        values = [0.1, 0.2, 0.3, 0.4, 0.9]
+
+        percentile = benchmark_runner._nearest_rank_percentile(values, 95)
+
+        self.assertEqual(percentile, 0.9)
 
 
 if __name__ == "__main__":

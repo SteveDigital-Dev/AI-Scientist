@@ -1,6 +1,7 @@
 import argparse
 import io
 import json
+import math
 import statistics
 import sys
 import time
@@ -18,6 +19,19 @@ def _disable_suite_cleanup(node) -> None:
         node._cleanup = False
         for child in node:
             _disable_suite_cleanup(child)
+
+
+def _nearest_rank_percentile(values: list[float], percentile: float) -> float:
+    if not values:
+        raise ValueError("values must not be empty")
+    if percentile <= 0:
+        return min(values)
+    if percentile >= 100:
+        return max(values)
+
+    ordered = sorted(values)
+    rank = max(1, math.ceil((percentile / 100) * len(ordered)))
+    return ordered[rank - 1]
 
 
 def run_once(start_dir: str, pattern: str, discovered_suite=None) -> tuple[bool, float]:
@@ -78,11 +92,13 @@ def main(argv: list[str] | None = None, stdout=None) -> int:
 
     pass_rate = sum(1 for t in trials if t["success"]) / len(trials)
     error_rate = 1.0 - pass_rate
-    avg_seconds = statistics.mean(t["seconds"] for t in trials)
-    median_seconds = statistics.median(t["seconds"] for t in trials)
-    stdev_seconds = statistics.pstdev(t["seconds"] for t in trials)
-    min_seconds = min(t["seconds"] for t in trials)
-    max_seconds = max(t["seconds"] for t in trials)
+    seconds = [t["seconds"] for t in trials]
+    avg_seconds = statistics.mean(seconds)
+    median_seconds = statistics.median(seconds)
+    stdev_seconds = statistics.pstdev(seconds)
+    min_seconds = min(seconds)
+    max_seconds = max(seconds)
+    p95_seconds = _nearest_rank_percentile(seconds, 95)
 
     command = [
         "python",
@@ -109,6 +125,7 @@ def main(argv: list[str] | None = None, stdout=None) -> int:
         "stdev_seconds": stdev_seconds,
         "min_seconds": min_seconds,
         "max_seconds": max_seconds,
+        "p95_seconds": p95_seconds,
         "pass_rate": pass_rate,
         "error_rate": error_rate,
     }
