@@ -92,6 +92,8 @@ def main(argv: list[str] | None = None, stdout=None) -> int:
 
     pass_rate = sum(1 for t in trials if t["success"]) / len(trials)
     error_rate = 1.0 - pass_rate
+    successful_trials = sum(1 for t in trials if t["success"])
+    failed_trials = len(trials) - successful_trials
     seconds = [t["seconds"] for t in trials]
     avg_seconds = statistics.mean(seconds)
     median_seconds = statistics.median(seconds)
@@ -99,6 +101,7 @@ def main(argv: list[str] | None = None, stdout=None) -> int:
     min_seconds = min(seconds)
     max_seconds = max(seconds)
     p95_seconds = _nearest_rank_percentile(seconds, 95)
+    throughput_trials_per_second = len(trials) / sum(seconds)
 
     command = [
         "python",
@@ -120,12 +123,15 @@ def main(argv: list[str] | None = None, stdout=None) -> int:
         "pattern": args.pattern,
         "reuse_discovery": args.reuse_discovery,
         "trials": trials,
+        "successful_trials": successful_trials,
+        "failed_trials": failed_trials,
         "avg_seconds": avg_seconds,
         "median_seconds": median_seconds,
         "stdev_seconds": stdev_seconds,
         "min_seconds": min_seconds,
         "max_seconds": max_seconds,
         "p95_seconds": p95_seconds,
+        "throughput_trials_per_second": throughput_trials_per_second,
         "pass_rate": pass_rate,
         "error_rate": error_rate,
     }

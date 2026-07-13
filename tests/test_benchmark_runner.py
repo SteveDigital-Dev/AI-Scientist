@@ -102,6 +102,10 @@ class BenchmarkRunnerCliTest(unittest.TestCase):
         self.assertEqual(payload["min_seconds"], payload["avg_seconds"])
         self.assertEqual(payload["max_seconds"], payload["avg_seconds"])
         self.assertEqual(payload["p95_seconds"], payload["avg_seconds"])
+        self.assertIn("throughput_trials_per_second", payload)
+        self.assertEqual(payload["throughput_trials_per_second"], 1 / payload["avg_seconds"])
+        self.assertEqual(payload["successful_trials"], 1)
+        self.assertEqual(payload["failed_trials"], 0)
 
     def test_nearest_rank_percentile_uses_tail_trial(self):
         values = [0.1, 0.2, 0.3, 0.4, 0.9]
