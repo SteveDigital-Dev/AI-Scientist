@@ -1,0 +1,21 @@
+test_state_does_not_leak_between_trials (test_stateful_fixture.StatefulReuseFixtureTest.test_state_does_not_leak_between_trials) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+test_state_does_not_leak_between_trials (test_stateful_fixture.StatefulReuseFixtureTest.test_state_does_not_leak_between_trials) ... FAIL
+
+======================================================================
+FAIL: test_state_does_not_leak_between_trials (test_stateful_fixture.StatefulReuseFixtureTest.test_state_does_not_leak_between_trials)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-14-harness-refinement\baseline-fixture\test_stateful_fixture.py", line 6, in test_state_does_not_leak_between_trials
+    self.assertFalse(hasattr(self, "_seen"))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false
+
+----------------------------------------------------------------------
+Ran 1 test in 0.007s
+
+FAILED (failures=1)

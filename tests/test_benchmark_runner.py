@@ -13,6 +13,7 @@ from tests import benchmark_runner
 ROOT = Path(__file__).resolve().parents[1]
 RUNNER = ROOT / "tests" / "benchmark_runner.py"
 CLI_SMOKE_PATTERN = "test_cli_smoke_fixture.py"
+REUSE_DISCOVERY_PATTERN = "test_reuse_discovery_fixture.py"
 
 
 class BenchmarkRunnerCliTest(unittest.TestCase):
@@ -113,6 +114,31 @@ class BenchmarkRunnerCliTest(unittest.TestCase):
         percentile = benchmark_runner._nearest_rank_percentile(values, 95)
 
         self.assertEqual(percentile, 0.9)
+
+    def test_reuse_discovery_clones_suite_for_each_trial(self):
+        stdout = io.StringIO()
+
+        exit_code = benchmark_runner.main(
+            [
+                "--start-dir",
+                "tests",
+                "--pattern",
+                REUSE_DISCOVERY_PATTERN,
+                "--trials",
+                "3",
+                "--warmup",
+                "0",
+                "--reuse-discovery",
+            ],
+            stdout=stdout,
+        )
+
+        self.assertEqual(exit_code, 0)
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(payload["successful_trials"], 3)
+        self.assertEqual(payload["failed_trials"], 0)
+        self.assertEqual(payload["pass_rate"], 1.0)
 
 
 if __name__ == "__main__":

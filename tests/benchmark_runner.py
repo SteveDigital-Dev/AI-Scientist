@@ -1,4 +1,5 @@
 import argparse
+import copy
 import io
 import json
 import math
@@ -39,7 +40,8 @@ def run_once(start_dir: str, pattern: str, discovered_suite=None) -> tuple[bool,
     if discovered_suite is None:
         suite = unittest.defaultTestLoader.discover(start_dir=start_dir, pattern=pattern)
     else:
-        suite = discovered_suite
+        # Isolate each trial from test-instance mutations while still avoiding re-discovery.
+        suite = copy.deepcopy(discovered_suite)
     runner = unittest.TextTestRunner(stream=io.StringIO(), verbosity=0)
     result = runner.run(suite)
     seconds = time.perf_counter() - start
