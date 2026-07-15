@@ -107,6 +107,21 @@ class BenchmarkRunnerCliTest(unittest.TestCase):
         self.assertEqual(payload["throughput_trials_per_second"], 1 / payload["avg_seconds"])
         self.assertEqual(payload["successful_trials"], 1)
         self.assertEqual(payload["failed_trials"], 0)
+        self.assertIn("summary", payload)
+        self.assertEqual(payload["summary"]["reliability"]["successful_trials"], 1)
+        self.assertEqual(payload["summary"]["reliability"]["failed_trials"], 0)
+        self.assertEqual(payload["summary"]["reliability"]["pass_rate"], payload["pass_rate"])
+        self.assertEqual(payload["summary"]["reliability"]["error_rate"], payload["error_rate"])
+        self.assertEqual(payload["summary"]["latency_seconds"]["avg"], payload["avg_seconds"])
+        self.assertEqual(payload["summary"]["latency_seconds"]["median"], payload["median_seconds"])
+        self.assertEqual(payload["summary"]["latency_seconds"]["stdev"], payload["stdev_seconds"])
+        self.assertEqual(payload["summary"]["latency_seconds"]["min"], payload["min_seconds"])
+        self.assertEqual(payload["summary"]["latency_seconds"]["max"], payload["max_seconds"])
+        self.assertEqual(payload["summary"]["latency_seconds"]["p95"], payload["p95_seconds"])
+        self.assertEqual(
+            payload["summary"]["throughput"]["trials_per_second"],
+            payload["throughput_trials_per_second"],
+        )
 
     def test_nearest_rank_percentile_uses_tail_trial(self):
         values = [0.1, 0.2, 0.3, 0.4, 0.9]

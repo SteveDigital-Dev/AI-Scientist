@@ -136,6 +136,25 @@ def main(argv: list[str] | None = None, stdout=None) -> int:
         "throughput_trials_per_second": throughput_trials_per_second,
         "pass_rate": pass_rate,
         "error_rate": error_rate,
+        "summary": {
+            "reliability": {
+                "successful_trials": successful_trials,
+                "failed_trials": failed_trials,
+                "pass_rate": pass_rate,
+                "error_rate": error_rate,
+            },
+            "latency_seconds": {
+                "avg": avg_seconds,
+                "median": median_seconds,
+                "stdev": stdev_seconds,
+                "min": min_seconds,
+                "max": max_seconds,
+                "p95": p95_seconds,
+            },
+            "throughput": {
+                "trials_per_second": throughput_trials_per_second,
+            },
+        },
     }
     rendered = json.dumps(payload, indent=2)
 

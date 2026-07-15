@@ -1,0 +1,63 @@
+{
+  "command": "python tests/benchmark_runner.py --start-dir tests --pattern test_benchmark_runner.py --trials 5 --warmup 1 --reuse-discovery",
+  "start_dir": "tests",
+  "pattern": "test_benchmark_runner.py",
+  "reuse_discovery": true,
+  "trials": [
+    {
+      "trial": 1,
+      "success": true,
+      "seconds": 0.36400589998811483
+    },
+    {
+      "trial": 2,
+      "success": true,
+      "seconds": 0.3293415999505669
+    },
+    {
+      "trial": 3,
+      "success": true,
+      "seconds": 0.30108859995380044
+    },
+    {
+      "trial": 4,
+      "success": true,
+      "seconds": 0.4549988000653684
+    },
+    {
+      "trial": 5,
+      "success": true,
+      "seconds": 0.3137954999692738
+    }
+  ],
+  "successful_trials": 5,
+  "failed_trials": 0,
+  "avg_seconds": 0.35264607998542485,
+  "median_seconds": 0.3293415999505669,
+  "stdev_seconds": 0.0553457585055162,
+  "min_seconds": 0.30108859995380044,
+  "max_seconds": 0.4549988000653684,
+  "p95_seconds": 0.4549988000653684,
+  "throughput_trials_per_second": 2.8357042847075764,
+  "pass_rate": 1.0,
+  "error_rate": 0.0,
+  "summary": {
+    "reliability": {
+      "successful_trials": 5,
+      "failed_trials": 0,
+      "pass_rate": 1.0,
+      "error_rate": 0.0
+    },
+    "latency_seconds": {
+      "avg": 0.35264607998542485,
+      "median": 0.3293415999505669,
+      "stdev": 0.0553457585055162,
+      "min": 0.30108859995380044,
+      "max": 0.4549988000653684,
+      "p95": 0.4549988000653684
+    },
+    "throughput": {
+      "trials_per_second": 2.8357042847075764
+    }
+  }
+}
