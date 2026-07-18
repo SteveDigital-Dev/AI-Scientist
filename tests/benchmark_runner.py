@@ -35,7 +35,27 @@ def _nearest_rank_percentile(values: list[float], percentile: float) -> float:
     return ordered[rank - 1]
 
 
-def run_once(start_dir: str, pattern: str, discovered_suite=None) -> tuple[bool, float]:
+def _summarize_outcome(case: unittest.case.TestCase, detail: str) -> dict[str, str]:
+    lines = [line.strip() for line in detail.splitlines() if line.strip()]
+    headline = lines[-1] if lines else ""
+    for line in reversed(lines):
+        if "Error" in line or "Exception" in line:
+            headline = line
+            break
+    return {
+        "test": case.id(),
+        "message": headline,
+    }
+
+
+def _collect_failure_summaries(result: unittest.TestResult) -> list[dict[str, str]]:
+    summaries = []
+    for case, detail in list(result.failures) + list(result.errors):
+        summaries.append(_summarize_outcome(case, detail))
+    return summaries
+
+
+def run_once(start_dir: str, pattern: str, discovered_suite=None) -> tuple[bool, float, list[dict[str, str]]]:
     start = time.perf_counter()
     if discovered_suite is None:
         suite = unittest.defaultTestLoader.discover(start_dir=start_dir, pattern=pattern)
@@ -46,7 +66,8 @@ def run_once(start_dir: str, pattern: str, discovered_suite=None) -> tuple[bool,
     result = runner.run(suite)
     seconds = time.perf_counter() - start
     success = result.wasSuccessful()
-    return success, seconds
+    failure_summaries = _collect_failure_summaries(result)
+    return success, seconds, failure_summaries
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -89,8 +110,11 @@ def main(argv: list[str] | None = None, stdout=None) -> int:
 
     trials = []
     for i in range(max(args.trials, 1)):
-        ok, sec = run_once(args.start_dir, args.pattern, discovered_suite)
-        trials.append({"trial": i + 1, "success": ok, "seconds": sec})
+        ok, sec, failure_summaries = run_once(args.start_dir, args.pattern, discovered_suite)
+        trial = {"trial": i + 1, "success": ok, "seconds": sec}
+        if failure_summaries:
+            trial["failure_summaries"] = failure_summaries
+        trials.append(trial)
 
     pass_rate = sum(1 for t in trials if t["success"]) / len(trials)
     error_rate = 1.0 - pass_rate

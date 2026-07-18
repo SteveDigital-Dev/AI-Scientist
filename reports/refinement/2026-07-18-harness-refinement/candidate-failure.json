@@ -1,0 +1,71 @@
+{
+  "command": "python tests/benchmark_runner.py --start-dir reports/refinement/2026-07-18-harness-refinement/failure-fixture --pattern test_failure_fixture.py --trials 3 --warmup 0 --reuse-discovery",
+  "start_dir": "reports/refinement/2026-07-18-harness-refinement/failure-fixture",
+  "pattern": "test_failure_fixture.py",
+  "reuse_discovery": true,
+  "trials": [
+    {
+      "trial": 1,
+      "success": false,
+      "seconds": 0.0018283000099472702,
+      "failure_summaries": [
+        {
+          "test": "test_failure_fixture.FailureFixtureTest.test_expected_failure_signal",
+          "message": "AssertionError: 'baseline' != 'candidate'"
+        }
+      ]
+    },
+    {
+      "trial": 2,
+      "success": false,
+      "seconds": 0.0011326999810989946,
+      "failure_summaries": [
+        {
+          "test": "test_failure_fixture.FailureFixtureTest.test_expected_failure_signal",
+          "message": "AssertionError: 'baseline' != 'candidate'"
+        }
+      ]
+    },
+    {
+      "trial": 3,
+      "success": false,
+      "seconds": 0.0009198000188916922,
+      "failure_summaries": [
+        {
+          "test": "test_failure_fixture.FailureFixtureTest.test_expected_failure_signal",
+          "message": "AssertionError: 'baseline' != 'candidate'"
+        }
+      ]
+    }
+  ],
+  "successful_trials": 0,
+  "failed_trials": 3,
+  "avg_seconds": 0.0012936000033126522,
+  "median_seconds": 0.0011326999810989946,
+  "stdev_seconds": 0.00038795160462637,
+  "min_seconds": 0.0009198000188916922,
+  "max_seconds": 0.0018283000099472702,
+  "p95_seconds": 0.0018283000099472702,
+  "throughput_trials_per_second": 773.0364853426089,
+  "pass_rate": 0.0,
+  "error_rate": 1.0,
+  "summary": {
+    "reliability": {
+      "successful_trials": 0,
+      "failed_trials": 3,
+      "pass_rate": 0.0,
+      "error_rate": 1.0
+    },
+    "latency_seconds": {
+      "avg": 0.0012936000033126522,
+      "median": 0.0011326999810989946,
+      "stdev": 0.00038795160462637,
+      "min": 0.0009198000188916922,
+      "max": 0.0018283000099472702,
+      "p95": 0.0018283000099472702
+    },
+    "throughput": {
+      "trials_per_second": 773.0364853426089
+    }
+  }
+}

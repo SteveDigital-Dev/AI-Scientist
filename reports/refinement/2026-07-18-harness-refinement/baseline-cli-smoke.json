@@ -1,0 +1,63 @@
+{
+  "command": "python tests/benchmark_runner.py --start-dir tests --pattern test_cli_smoke_fixture.py --trials 5 --warmup 1 --reuse-discovery",
+  "start_dir": "tests",
+  "pattern": "test_cli_smoke_fixture.py",
+  "reuse_discovery": true,
+  "trials": [
+    {
+      "trial": 1,
+      "success": true,
+      "seconds": 0.001075899985153228
+    },
+    {
+      "trial": 2,
+      "success": true,
+      "seconds": 0.0005739000043831766
+    },
+    {
+      "trial": 3,
+      "success": true,
+      "seconds": 0.0004017000028397888
+    },
+    {
+      "trial": 4,
+      "success": true,
+      "seconds": 0.00045319998753257096
+    },
+    {
+      "trial": 5,
+      "success": true,
+      "seconds": 0.00036020000698044896
+    }
+  ],
+  "successful_trials": 5,
+  "failed_trials": 0,
+  "avg_seconds": 0.0005729799973778427,
+  "median_seconds": 0.00045319998753257096,
+  "stdev_seconds": 0.00026149140411030255,
+  "min_seconds": 0.00036020000698044896,
+  "max_seconds": 0.001075899985153228,
+  "p95_seconds": 0.001075899985153228,
+  "throughput_trials_per_second": 1745.2616227029748,
+  "pass_rate": 1.0,
+  "error_rate": 0.0,
+  "summary": {
+    "reliability": {
+      "successful_trials": 5,
+      "failed_trials": 0,
+      "pass_rate": 1.0,
+      "error_rate": 0.0
+    },
+    "latency_seconds": {
+      "avg": 0.0005729799973778427,
+      "median": 0.00045319998753257096,
+      "stdev": 0.00026149140411030255,
+      "min": 0.00036020000698044896,
+      "max": 0.001075899985153228,
+      "p95": 0.001075899985153228
+    },
+    "throughput": {
+      "trials_per_second": 1745.2616227029748
+    }
+  }
+}

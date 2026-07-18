@@ -155,6 +155,58 @@ class BenchmarkRunnerCliTest(unittest.TestCase):
         self.assertEqual(payload["failed_trials"], 0)
         self.assertEqual(payload["pass_rate"], 1.0)
 
+    def test_failed_trials_include_failure_summaries(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            fixture_dir = Path(tmp_dir) / "failure_fixture"
+            fixture_dir.mkdir()
+            fixture_path = fixture_dir / "test_failure_fixture.py"
+            fixture_path.write_text(
+                "\n".join(
+                    [
+                        "import unittest",
+                        "",
+                        "",
+                        "class FailureFixtureTest(unittest.TestCase):",
+                        "    def test_expected_failure_signal(self):",
+                        '        self.assertEqual("baseline", "candidate")',
+                        "",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            stdout = io.StringIO()
+            exit_code = benchmark_runner.main(
+                [
+                    "--start-dir",
+                    str(fixture_dir),
+                    "--pattern",
+                    "test_failure_fixture.py",
+                    "--trials",
+                    "1",
+                    "--warmup",
+                    "0",
+                    "--reuse-discovery",
+                ],
+                stdout=stdout,
+            )
+
+            self.assertEqual(exit_code, 1)
+
+            payload = json.loads(stdout.getvalue())
+            self.assertEqual(payload["failed_trials"], 1)
+            self.assertEqual(payload["trials"][0]["success"], False)
+            self.assertIn("failure_summaries", payload["trials"][0])
+            self.assertEqual(len(payload["trials"][0]["failure_summaries"]), 1)
+            self.assertEqual(
+                payload["trials"][0]["failure_summaries"][0]["test"],
+                "test_failure_fixture.FailureFixtureTest.test_expected_failure_signal",
+            )
+            self.assertIn(
+                "AssertionError",
+                payload["trials"][0]["failure_summaries"][0]["message"],
+            )
+
 
 if __name__ == "__main__":
     unittest.main()
