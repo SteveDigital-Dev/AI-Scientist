@@ -55,6 +55,27 @@ def _collect_failure_summaries(result: unittest.TestResult) -> list[dict[str, st
     return summaries
 
 
+def _build_failure_rollup(trials: list[dict[str, object]]) -> dict[str, object]:
+    failed_tests = []
+    first_failure = None
+    failure_count = 0
+
+    for trial in trials:
+        for summary in trial.get("failure_summaries", []):
+            failure_count += 1
+            if first_failure is None:
+                first_failure = summary
+            test_id = summary["test"]
+            if test_id not in failed_tests:
+                failed_tests.append(test_id)
+
+    return {
+        "failed_tests": failed_tests,
+        "first_failure": first_failure,
+        "failure_count": failure_count,
+    }
+
+
 def run_once(start_dir: str, pattern: str, discovered_suite=None) -> tuple[bool, float, list[dict[str, str]]]:
     start = time.perf_counter()
     if discovered_suite is None:
@@ -128,6 +149,7 @@ def main(argv: list[str] | None = None, stdout=None) -> int:
     max_seconds = max(seconds)
     p95_seconds = _nearest_rank_percentile(seconds, 95)
     throughput_trials_per_second = len(trials) / sum(seconds)
+    failure_rollup = _build_failure_rollup(trials)
 
     command = [
         "python",
@@ -160,6 +182,9 @@ def main(argv: list[str] | None = None, stdout=None) -> int:
         "throughput_trials_per_second": throughput_trials_per_second,
         "pass_rate": pass_rate,
         "error_rate": error_rate,
+        "failed_tests": failure_rollup["failed_tests"],
+        "first_failure": failure_rollup["first_failure"],
+        "failure_count": failure_rollup["failure_count"],
         "summary": {
             "reliability": {
                 "successful_trials": successful_trials,
@@ -167,6 +192,7 @@ def main(argv: list[str] | None = None, stdout=None) -> int:
                 "pass_rate": pass_rate,
                 "error_rate": error_rate,
             },
+            "failures": failure_rollup,
             "latency_seconds": {
                 "avg": avg_seconds,
                 "median": median_seconds,
