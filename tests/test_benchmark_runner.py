@@ -42,6 +42,7 @@ class BenchmarkRunnerCliTest(unittest.TestCase):
             self.assertTrue(output_path.exists())
 
             payload = json.loads(output_path.read_text(encoding="utf-8"))
+            self.assertEqual(payload["schema_version"], benchmark_runner.SCHEMA_VERSION)
             self.assertEqual(payload["pattern"], CLI_SMOKE_PATTERN)
             self.assertEqual(payload["pass_rate"], 1.0)
 
@@ -95,6 +96,7 @@ class BenchmarkRunnerCliTest(unittest.TestCase):
         self.assertEqual(exit_code, 0)
 
         payload = json.loads(stdout.getvalue())
+        self.assertEqual(payload["schema_version"], benchmark_runner.SCHEMA_VERSION)
         self.assertIn("median_seconds", payload)
         self.assertIn("min_seconds", payload)
         self.assertIn("max_seconds", payload)
@@ -111,6 +113,7 @@ class BenchmarkRunnerCliTest(unittest.TestCase):
         self.assertIsNone(payload["first_failure"])
         self.assertEqual(payload["failure_count"], 0)
         self.assertIn("summary", payload)
+        self.assertEqual(payload["summary"]["metadata"]["schema_version"], payload["schema_version"])
         self.assertEqual(payload["summary"]["reliability"]["successful_trials"], 1)
         self.assertEqual(payload["summary"]["reliability"]["failed_trials"], 0)
         self.assertEqual(payload["summary"]["reliability"]["pass_rate"], payload["pass_rate"])
@@ -200,6 +203,7 @@ class BenchmarkRunnerCliTest(unittest.TestCase):
             self.assertEqual(exit_code, 1)
 
             payload = json.loads(stdout.getvalue())
+            self.assertEqual(payload["schema_version"], benchmark_runner.SCHEMA_VERSION)
             self.assertEqual(payload["failed_trials"], 1)
             self.assertEqual(payload["trials"][0]["success"], False)
             self.assertIn("failure_summaries", payload["trials"][0])
@@ -216,6 +220,7 @@ class BenchmarkRunnerCliTest(unittest.TestCase):
             self.assertEqual(payload["failed_tests"], [failure_summary["test"]])
             self.assertEqual(payload["first_failure"], failure_summary)
             self.assertEqual(payload["failure_count"], 1)
+            self.assertEqual(payload["summary"]["metadata"]["schema_version"], payload["schema_version"])
             self.assertEqual(payload["summary"]["failures"]["failed_tests"], payload["failed_tests"])
             self.assertEqual(payload["summary"]["failures"]["first_failure"], payload["first_failure"])
             self.assertEqual(payload["summary"]["failures"]["failure_count"], payload["failure_count"])

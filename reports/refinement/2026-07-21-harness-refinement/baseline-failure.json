@@ -1,0 +1,89 @@
+{
+  "command": "python tests/benchmark_runner.py --start-dir reports/refinement/2026-07-21-harness-refinement/failure-fixture --pattern test_failure_fixture.py --trials 3 --warmup 0 --reuse-discovery",
+  "start_dir": "reports/refinement/2026-07-21-harness-refinement/failure-fixture",
+  "pattern": "test_failure_fixture.py",
+  "reuse_discovery": true,
+  "trials": [
+    {
+      "trial": 1,
+      "success": false,
+      "seconds": 0.003325300000142306,
+      "failure_summaries": [
+        {
+          "test": "test_failure_fixture.FailureFixtureTest.test_expected_failure_signal",
+          "message": "AssertionError: 'baseline' != 'candidate'"
+        }
+      ]
+    },
+    {
+      "trial": 2,
+      "success": false,
+      "seconds": 0.004044300003442913,
+      "failure_summaries": [
+        {
+          "test": "test_failure_fixture.FailureFixtureTest.test_expected_failure_signal",
+          "message": "AssertionError: 'baseline' != 'candidate'"
+        }
+      ]
+    },
+    {
+      "trial": 3,
+      "success": false,
+      "seconds": 0.002295899990713224,
+      "failure_summaries": [
+        {
+          "test": "test_failure_fixture.FailureFixtureTest.test_expected_failure_signal",
+          "message": "AssertionError: 'baseline' != 'candidate'"
+        }
+      ]
+    }
+  ],
+  "successful_trials": 0,
+  "failed_trials": 3,
+  "avg_seconds": 0.0032218333314328143,
+  "median_seconds": 0.003325300000142306,
+  "stdev_seconds": 0.0007175210402390879,
+  "min_seconds": 0.002295899990713224,
+  "max_seconds": 0.004044300003442913,
+  "p95_seconds": 0.004044300003442913,
+  "throughput_trials_per_second": 310.3822877005496,
+  "pass_rate": 0.0,
+  "error_rate": 1.0,
+  "failed_tests": [
+    "test_failure_fixture.FailureFixtureTest.test_expected_failure_signal"
+  ],
+  "first_failure": {
+    "test": "test_failure_fixture.FailureFixtureTest.test_expected_failure_signal",
+    "message": "AssertionError: 'baseline' != 'candidate'"
+  },
+  "failure_count": 3,
+  "summary": {
+    "reliability": {
+      "successful_trials": 0,
+      "failed_trials": 3,
+      "pass_rate": 0.0,
+      "error_rate": 1.0
+    },
+    "failures": {
+      "failed_tests": [
+        "test_failure_fixture.FailureFixtureTest.test_expected_failure_signal"
+      ],
+      "first_failure": {
+        "test": "test_failure_fixture.FailureFixtureTest.test_expected_failure_signal",
+        "message": "AssertionError: 'baseline' != 'candidate'"
+      },
+      "failure_count": 3
+    },
+    "latency_seconds": {
+      "avg": 0.0032218333314328143,
+      "median": 0.003325300000142306,
+      "stdev": 0.0007175210402390879,
+      "min": 0.002295899990713224,
+      "max": 0.004044300003442913,
+      "p95": 0.004044300003442913
+    },
+    "throughput": {
+      "trials_per_second": 310.3822877005496
+    }
+  }
+}

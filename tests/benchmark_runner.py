@@ -13,6 +13,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+SCHEMA_VERSION = "benchmark-runner.v2"
+
 
 def _disable_suite_cleanup(node) -> None:
     if isinstance(node, unittest.TestSuite):
@@ -166,6 +168,7 @@ def main(argv: list[str] | None = None, stdout=None) -> int:
     ]
 
     payload = {
+        "schema_version": SCHEMA_VERSION,
         "command": " ".join(command),
         "start_dir": args.start_dir,
         "pattern": args.pattern,
@@ -186,6 +189,9 @@ def main(argv: list[str] | None = None, stdout=None) -> int:
         "first_failure": failure_rollup["first_failure"],
         "failure_count": failure_rollup["failure_count"],
         "summary": {
+            "metadata": {
+                "schema_version": SCHEMA_VERSION,
+            },
             "reliability": {
                 "successful_trials": successful_trials,
                 "failed_trials": failed_trials,
