@@ -1,0 +1,77 @@
+{
+  "schema_version": "benchmark-runner.v2",
+  "benchmark_config_digest": "74e8c13b86c94a44809e0abc1247bf7f19c7b3fca2b66139e74f990afa974e3b",
+  "command": "python tests/benchmark_runner.py --start-dir tests --pattern test_cli_smoke_fixture.py --trials 5 --warmup 1 --reuse-discovery",
+  "start_dir": "tests",
+  "pattern": "test_cli_smoke_fixture.py",
+  "reuse_discovery": true,
+  "trials": [
+    {
+      "trial": 1,
+      "success": true,
+      "seconds": 0.0005565999890677631
+    },
+    {
+      "trial": 2,
+      "success": true,
+      "seconds": 0.0006982999911997467
+    },
+    {
+      "trial": 3,
+      "success": true,
+      "seconds": 0.0005457999941427261
+    },
+    {
+      "trial": 4,
+      "success": true,
+      "seconds": 0.0004054000019095838
+    },
+    {
+      "trial": 5,
+      "success": true,
+      "seconds": 0.0005437000072561204
+    }
+  ],
+  "successful_trials": 5,
+  "failed_trials": 0,
+  "avg_seconds": 0.0005499599967151881,
+  "median_seconds": 0.0005457999941427261,
+  "stdev_seconds": 9.273934294542744e-05,
+  "min_seconds": 0.0004054000019095838,
+  "max_seconds": 0.0006982999911997467,
+  "p95_seconds": 0.0006982999911997467,
+  "throughput_trials_per_second": 1818.314070064768,
+  "pass_rate": 1.0,
+  "error_rate": 0.0,
+  "failed_tests": [],
+  "first_failure": null,
+  "failure_count": 0,
+  "summary": {
+    "metadata": {
+      "schema_version": "benchmark-runner.v2",
+      "benchmark_config_digest": "74e8c13b86c94a44809e0abc1247bf7f19c7b3fca2b66139e74f990afa974e3b"
+    },
+    "reliability": {
+      "successful_trials": 5,
+      "failed_trials": 0,
+      "pass_rate": 1.0,
+      "error_rate": 0.0
+    },
+    "failures": {
+      "failed_tests": [],
+      "first_failure": null,
+      "failure_count": 0
+    },
+    "latency_seconds": {
+      "avg": 0.0005499599967151881,
+      "median": 0.0005457999941427261,
+      "stdev": 9.273934294542744e-05,
+      "min": 0.0004054000019095838,
+      "max": 0.0006982999911997467,
+      "p95": 0.0006982999911997467
+    },
+    "throughput": {
+      "trials_per_second": 1818.314070064768
+    }
+  }
+}

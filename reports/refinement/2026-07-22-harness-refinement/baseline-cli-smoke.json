@@ -1,0 +1,75 @@
+{
+  "schema_version": "benchmark-runner.v2",
+  "command": "python tests/benchmark_runner.py --start-dir tests --pattern test_cli_smoke_fixture.py --trials 5 --warmup 1 --reuse-discovery",
+  "start_dir": "tests",
+  "pattern": "test_cli_smoke_fixture.py",
+  "reuse_discovery": true,
+  "trials": [
+    {
+      "trial": 1,
+      "success": true,
+      "seconds": 0.000516200001584366
+    },
+    {
+      "trial": 2,
+      "success": true,
+      "seconds": 0.0004344999906606972
+    },
+    {
+      "trial": 3,
+      "success": true,
+      "seconds": 0.0003803000145126134
+    },
+    {
+      "trial": 4,
+      "success": true,
+      "seconds": 0.0005585000035353005
+    },
+    {
+      "trial": 5,
+      "success": true,
+      "seconds": 0.0004327000060584396
+    }
+  ],
+  "successful_trials": 5,
+  "failed_trials": 0,
+  "avg_seconds": 0.00046444000327028334,
+  "median_seconds": 0.0004344999906606972,
+  "stdev_seconds": 6.404646838279174e-05,
+  "min_seconds": 0.0003803000145126134,
+  "max_seconds": 0.0005585000035353005,
+  "p95_seconds": 0.0005585000035353005,
+  "throughput_trials_per_second": 2153.130636807021,
+  "pass_rate": 1.0,
+  "error_rate": 0.0,
+  "failed_tests": [],
+  "first_failure": null,
+  "failure_count": 0,
+  "summary": {
+    "metadata": {
+      "schema_version": "benchmark-runner.v2"
+    },
+    "reliability": {
+      "successful_trials": 5,
+      "failed_trials": 0,
+      "pass_rate": 1.0,
+      "error_rate": 0.0
+    },
+    "failures": {
+      "failed_tests": [],
+      "first_failure": null,
+      "failure_count": 0
+    },
+    "latency_seconds": {
+      "avg": 0.00046444000327028334,
+      "median": 0.0004344999906606972,
+      "stdev": 6.404646838279174e-05,
+      "min": 0.0003803000145126134,
+      "max": 0.0005585000035353005,
+      "p95": 0.0005585000035353005
+    },
+    "throughput": {
+      "trials_per_second": 2153.130636807021
+    }
+  }
+}

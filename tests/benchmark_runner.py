@@ -1,5 +1,6 @@
 import argparse
 import copy
+import hashlib
 import io
 import json
 import math
@@ -76,6 +77,27 @@ def _build_failure_rollup(trials: list[dict[str, object]]) -> dict[str, object]:
         "first_failure": first_failure,
         "failure_count": failure_count,
     }
+
+
+def _build_benchmark_config_digest(
+    *,
+    schema_version: str,
+    start_dir: str,
+    pattern: str,
+    trials: int,
+    warmup: int,
+    reuse_discovery: bool,
+) -> str:
+    config_payload = {
+        "pattern": pattern,
+        "reuse_discovery": reuse_discovery,
+        "schema_version": schema_version,
+        "start_dir": start_dir,
+        "trials": trials,
+        "warmup": warmup,
+    }
+    rendered = json.dumps(config_payload, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(rendered.encode("utf-8")).hexdigest()
 
 
 def run_once(start_dir: str, pattern: str, discovered_suite=None) -> tuple[bool, float, list[dict[str, str]]]:
@@ -166,9 +188,18 @@ def main(argv: list[str] | None = None, stdout=None) -> int:
         str(args.warmup),
         "--reuse-discovery" if args.reuse_discovery else "--no-reuse-discovery",
     ]
+    benchmark_config_digest = _build_benchmark_config_digest(
+        schema_version=SCHEMA_VERSION,
+        start_dir=args.start_dir,
+        pattern=args.pattern,
+        trials=args.trials,
+        warmup=args.warmup,
+        reuse_discovery=args.reuse_discovery,
+    )
 
     payload = {
         "schema_version": SCHEMA_VERSION,
+        "benchmark_config_digest": benchmark_config_digest,
         "command": " ".join(command),
         "start_dir": args.start_dir,
         "pattern": args.pattern,
@@ -191,6 +222,7 @@ def main(argv: list[str] | None = None, stdout=None) -> int:
         "summary": {
             "metadata": {
                 "schema_version": SCHEMA_VERSION,
+                "benchmark_config_digest": benchmark_config_digest,
             },
             "reliability": {
                 "successful_trials": successful_trials,
