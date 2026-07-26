@@ -246,6 +246,77 @@ class BenchmarkRunnerCliTest(unittest.TestCase):
             self.assertEqual(payload["summary"]["failures"]["first_failure"], payload["first_failure"])
             self.assertEqual(payload["summary"]["failures"]["failure_count"], payload["failure_count"])
 
+    def test_repeated_temp_fixture_runs_do_not_leak_test_modules(self):
+        for _ in range(2):
+            with tempfile.TemporaryDirectory() as tmp_dir:
+                fixture_dir = Path(tmp_dir) / "failure_fixture"
+                fixture_dir.mkdir()
+                fixture_path = fixture_dir / "test_failure_fixture.py"
+                fixture_path.write_text(
+                    "\n".join(
+                        [
+                            "import unittest",
+                            "",
+                            "",
+                            "class FailureFixtureTest(unittest.TestCase):",
+                            "    def test_expected_failure_signal(self):",
+                            '        self.assertEqual("baseline", "candidate")',
+                            "",
+                        ]
+                    ),
+                    encoding="utf-8",
+                )
+
+                stdout = io.StringIO()
+                exit_code = benchmark_runner.main(
+                    [
+                        "--start-dir",
+                        str(fixture_dir),
+                        "--pattern",
+                        "test_failure_fixture.py",
+                        "--trials",
+                        "1",
+                        "--warmup",
+                        "0",
+                        "--reuse-discovery",
+                    ],
+                    stdout=stdout,
+                )
+
+                self.assertEqual(exit_code, 1)
+                payload = json.loads(stdout.getvalue())
+                self.assertEqual(payload["failed_trials"], 1)
+                self.assertEqual(payload["failure_count"], 1)
+                self.assertIn("AssertionError", payload["first_failure"]["message"])
+
+    def test_main_ignores_default_loader_top_level_dir_leak(self):
+        stdout = io.StringIO()
+        original_top_level_dir = unittest.defaultTestLoader._top_level_dir
+
+        try:
+            unittest.defaultTestLoader._top_level_dir = str(Path(tempfile.gettempdir()) / "unrelated-root")
+            exit_code = benchmark_runner.main(
+                [
+                    "--start-dir",
+                    "tests",
+                    "--pattern",
+                    CLI_SMOKE_PATTERN,
+                    "--trials",
+                    "1",
+                    "--warmup",
+                    "0",
+                    "--reuse-discovery",
+                ],
+                stdout=stdout,
+            )
+        finally:
+            unittest.defaultTestLoader._top_level_dir = original_top_level_dir
+
+        self.assertEqual(exit_code, 0)
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(payload["successful_trials"], 1)
+        self.assertEqual(payload["failed_trials"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()

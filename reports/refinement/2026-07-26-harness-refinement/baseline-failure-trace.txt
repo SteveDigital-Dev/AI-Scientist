@@ -1,0 +1,326 @@
+trial: 1
+scenario: default_loader_isolation
+message: ValueError: path is on mount 'D:', start on mount 'C:'
+Traceback (most recent call last):
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 136, in run_trial
+    scenario(module)
+    ~~~~~~~~^^^^^^^^
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 52, in run_default_loader_isolation
+    exit_code = module.main(
+        [
+    ...<10 lines>...
+        stdout=stdout,
+    )
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\artifacts\baseline\benchmark_runner.py", line 150, in main
+    discovered_suite = unittest.defaultTestLoader.discover(start_dir=args.start_dir, pattern=args.pattern)
+  File "C:\Python313\Lib\unittest\loader.py", line 310, in discover
+    tests = list(self._find_tests(start_dir, pattern))
+  File "C:\Python313\Lib\unittest\loader.py", line 349, in _find_tests
+    name = self._get_name_from_path(start_dir)
+  File "C:\Python313\Lib\unittest\loader.py", line 331, in _get_name_from_path
+    _relpath = os.path.relpath(path, self._top_level_dir)
+  File "<frozen ntpath>", line 796, in relpath
+ValueError: path is on mount 'D:', start on mount 'C:'
+
+trial: 1
+scenario: repeated_temp_fixture
+message: ImportError: 'test_failure_fixture' module incorrectly imported from 'C:\\Users\\Steve Digital\\AppData\\Local\\Temp\\tmpu593z399\\failure_fixture'. Expected 'C:\\Users\\STEVED~1\\AppData\\Local\\Temp\\tmpaof_4yrz\\failure_fixture'. Is this module globally installed?
+Traceback (most recent call last):
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 136, in run_trial
+    scenario(module)
+    ~~~~~~~~^^^^^^^^
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 116, in run_repeated_temp_fixture
+    second = _run_temp_failure_fixture(module)
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 96, in _run_temp_failure_fixture
+    exit_code = module.main(
+        [
+    ...<10 lines>...
+        stdout=stdout,
+    )
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\artifacts\baseline\benchmark_runner.py", line 150, in main
+    discovered_suite = unittest.defaultTestLoader.discover(start_dir=args.start_dir, pattern=args.pattern)
+  File "C:\Python313\Lib\unittest\loader.py", line 310, in discover
+    tests = list(self._find_tests(start_dir, pattern))
+  File "C:\Python313\Lib\unittest\loader.py", line 366, in _find_tests
+    tests, should_recurse = self._find_test_path(full_path, pattern)
+                            ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\unittest\loader.py", line 418, in _find_test_path
+    raise ImportError(
+        msg % (mod_name, module_dir, expected_dir))
+ImportError: 'test_failure_fixture' module incorrectly imported from 'C:\\Users\\Steve Digital\\AppData\\Local\\Temp\\tmpu593z399\\failure_fixture'. Expected 'C:\\Users\\STEVED~1\\AppData\\Local\\Temp\\tmpaof_4yrz\\failure_fixture'. Is this module globally installed?
+
+trial: 2
+scenario: cli_smoke
+message: ValueError: path is on mount 'D:', start on mount 'C:'
+Traceback (most recent call last):
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 136, in run_trial
+    scenario(module)
+    ~~~~~~~~^^^^^^^^
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 27, in run_cli_smoke
+    exit_code = module.main(
+        [
+    ...<10 lines>...
+        stdout=stdout,
+    )
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\artifacts\baseline\benchmark_runner.py", line 150, in main
+    discovered_suite = unittest.defaultTestLoader.discover(start_dir=args.start_dir, pattern=args.pattern)
+  File "C:\Python313\Lib\unittest\loader.py", line 310, in discover
+    tests = list(self._find_tests(start_dir, pattern))
+  File "C:\Python313\Lib\unittest\loader.py", line 349, in _find_tests
+    name = self._get_name_from_path(start_dir)
+  File "C:\Python313\Lib\unittest\loader.py", line 331, in _get_name_from_path
+    _relpath = os.path.relpath(path, self._top_level_dir)
+  File "<frozen ntpath>", line 796, in relpath
+ValueError: path is on mount 'D:', start on mount 'C:'
+
+trial: 2
+scenario: default_loader_isolation
+message: ValueError: path is on mount 'D:', start on mount 'C:'
+Traceback (most recent call last):
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 136, in run_trial
+    scenario(module)
+    ~~~~~~~~^^^^^^^^
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 52, in run_default_loader_isolation
+    exit_code = module.main(
+        [
+    ...<10 lines>...
+        stdout=stdout,
+    )
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\artifacts\baseline\benchmark_runner.py", line 150, in main
+    discovered_suite = unittest.defaultTestLoader.discover(start_dir=args.start_dir, pattern=args.pattern)
+  File "C:\Python313\Lib\unittest\loader.py", line 310, in discover
+    tests = list(self._find_tests(start_dir, pattern))
+  File "C:\Python313\Lib\unittest\loader.py", line 349, in _find_tests
+    name = self._get_name_from_path(start_dir)
+  File "C:\Python313\Lib\unittest\loader.py", line 331, in _get_name_from_path
+    _relpath = os.path.relpath(path, self._top_level_dir)
+  File "<frozen ntpath>", line 796, in relpath
+ValueError: path is on mount 'D:', start on mount 'C:'
+
+trial: 2
+scenario: repeated_temp_fixture
+message: ImportError: Start directory is not importable: 'C:\\Users\\STEVED~1\\AppData\\Local\\Temp\\tmp3uwoegi6\\failure_fixture'
+Traceback (most recent call last):
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 136, in run_trial
+    scenario(module)
+    ~~~~~~~~^^^^^^^^
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 115, in run_repeated_temp_fixture
+    first = _run_temp_failure_fixture(module)
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 96, in _run_temp_failure_fixture
+    exit_code = module.main(
+        [
+    ...<10 lines>...
+        stdout=stdout,
+    )
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\artifacts\baseline\benchmark_runner.py", line 150, in main
+    discovered_suite = unittest.defaultTestLoader.discover(start_dir=args.start_dir, pattern=args.pattern)
+  File "C:\Python313\Lib\unittest\loader.py", line 308, in discover
+    raise ImportError('Start directory is not importable: %r' % start_dir)
+ImportError: Start directory is not importable: 'C:\\Users\\STEVED~1\\AppData\\Local\\Temp\\tmp3uwoegi6\\failure_fixture'
+
+trial: 3
+scenario: cli_smoke
+message: ValueError: path is on mount 'D:', start on mount 'C:'
+Traceback (most recent call last):
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 136, in run_trial
+    scenario(module)
+    ~~~~~~~~^^^^^^^^
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 27, in run_cli_smoke
+    exit_code = module.main(
+        [
+    ...<10 lines>...
+        stdout=stdout,
+    )
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\artifacts\baseline\benchmark_runner.py", line 150, in main
+    discovered_suite = unittest.defaultTestLoader.discover(start_dir=args.start_dir, pattern=args.pattern)
+  File "C:\Python313\Lib\unittest\loader.py", line 310, in discover
+    tests = list(self._find_tests(start_dir, pattern))
+  File "C:\Python313\Lib\unittest\loader.py", line 349, in _find_tests
+    name = self._get_name_from_path(start_dir)
+  File "C:\Python313\Lib\unittest\loader.py", line 331, in _get_name_from_path
+    _relpath = os.path.relpath(path, self._top_level_dir)
+  File "<frozen ntpath>", line 796, in relpath
+ValueError: path is on mount 'D:', start on mount 'C:'
+
+trial: 3
+scenario: default_loader_isolation
+message: ValueError: path is on mount 'D:', start on mount 'C:'
+Traceback (most recent call last):
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 136, in run_trial
+    scenario(module)
+    ~~~~~~~~^^^^^^^^
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 52, in run_default_loader_isolation
+    exit_code = module.main(
+        [
+    ...<10 lines>...
+        stdout=stdout,
+    )
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\artifacts\baseline\benchmark_runner.py", line 150, in main
+    discovered_suite = unittest.defaultTestLoader.discover(start_dir=args.start_dir, pattern=args.pattern)
+  File "C:\Python313\Lib\unittest\loader.py", line 310, in discover
+    tests = list(self._find_tests(start_dir, pattern))
+  File "C:\Python313\Lib\unittest\loader.py", line 349, in _find_tests
+    name = self._get_name_from_path(start_dir)
+  File "C:\Python313\Lib\unittest\loader.py", line 331, in _get_name_from_path
+    _relpath = os.path.relpath(path, self._top_level_dir)
+  File "<frozen ntpath>", line 796, in relpath
+ValueError: path is on mount 'D:', start on mount 'C:'
+
+trial: 3
+scenario: repeated_temp_fixture
+message: ImportError: Start directory is not importable: 'C:\\Users\\STEVED~1\\AppData\\Local\\Temp\\tmppdc0ek48\\failure_fixture'
+Traceback (most recent call last):
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 136, in run_trial
+    scenario(module)
+    ~~~~~~~~^^^^^^^^
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 115, in run_repeated_temp_fixture
+    first = _run_temp_failure_fixture(module)
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 96, in _run_temp_failure_fixture
+    exit_code = module.main(
+        [
+    ...<10 lines>...
+        stdout=stdout,
+    )
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\artifacts\baseline\benchmark_runner.py", line 150, in main
+    discovered_suite = unittest.defaultTestLoader.discover(start_dir=args.start_dir, pattern=args.pattern)
+  File "C:\Python313\Lib\unittest\loader.py", line 308, in discover
+    raise ImportError('Start directory is not importable: %r' % start_dir)
+ImportError: Start directory is not importable: 'C:\\Users\\STEVED~1\\AppData\\Local\\Temp\\tmppdc0ek48\\failure_fixture'
+
+trial: 4
+scenario: cli_smoke
+message: ValueError: path is on mount 'D:', start on mount 'C:'
+Traceback (most recent call last):
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 136, in run_trial
+    scenario(module)
+    ~~~~~~~~^^^^^^^^
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 27, in run_cli_smoke
+    exit_code = module.main(
+        [
+    ...<10 lines>...
+        stdout=stdout,
+    )
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\artifacts\baseline\benchmark_runner.py", line 150, in main
+    discovered_suite = unittest.defaultTestLoader.discover(start_dir=args.start_dir, pattern=args.pattern)
+  File "C:\Python313\Lib\unittest\loader.py", line 310, in discover
+    tests = list(self._find_tests(start_dir, pattern))
+  File "C:\Python313\Lib\unittest\loader.py", line 349, in _find_tests
+    name = self._get_name_from_path(start_dir)
+  File "C:\Python313\Lib\unittest\loader.py", line 331, in _get_name_from_path
+    _relpath = os.path.relpath(path, self._top_level_dir)
+  File "<frozen ntpath>", line 796, in relpath
+ValueError: path is on mount 'D:', start on mount 'C:'
+
+trial: 4
+scenario: default_loader_isolation
+message: ValueError: path is on mount 'D:', start on mount 'C:'
+Traceback (most recent call last):
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 136, in run_trial
+    scenario(module)
+    ~~~~~~~~^^^^^^^^
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 52, in run_default_loader_isolation
+    exit_code = module.main(
+        [
+    ...<10 lines>...
+        stdout=stdout,
+    )
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\artifacts\baseline\benchmark_runner.py", line 150, in main
+    discovered_suite = unittest.defaultTestLoader.discover(start_dir=args.start_dir, pattern=args.pattern)
+  File "C:\Python313\Lib\unittest\loader.py", line 310, in discover
+    tests = list(self._find_tests(start_dir, pattern))
+  File "C:\Python313\Lib\unittest\loader.py", line 349, in _find_tests
+    name = self._get_name_from_path(start_dir)
+  File "C:\Python313\Lib\unittest\loader.py", line 331, in _get_name_from_path
+    _relpath = os.path.relpath(path, self._top_level_dir)
+  File "<frozen ntpath>", line 796, in relpath
+ValueError: path is on mount 'D:', start on mount 'C:'
+
+trial: 4
+scenario: repeated_temp_fixture
+message: ImportError: Start directory is not importable: 'C:\\Users\\STEVED~1\\AppData\\Local\\Temp\\tmpiyd9ldgn\\failure_fixture'
+Traceback (most recent call last):
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 136, in run_trial
+    scenario(module)
+    ~~~~~~~~^^^^^^^^
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 115, in run_repeated_temp_fixture
+    first = _run_temp_failure_fixture(module)
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 96, in _run_temp_failure_fixture
+    exit_code = module.main(
+        [
+    ...<10 lines>...
+        stdout=stdout,
+    )
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\artifacts\baseline\benchmark_runner.py", line 150, in main
+    discovered_suite = unittest.defaultTestLoader.discover(start_dir=args.start_dir, pattern=args.pattern)
+  File "C:\Python313\Lib\unittest\loader.py", line 308, in discover
+    raise ImportError('Start directory is not importable: %r' % start_dir)
+ImportError: Start directory is not importable: 'C:\\Users\\STEVED~1\\AppData\\Local\\Temp\\tmpiyd9ldgn\\failure_fixture'
+
+trial: 5
+scenario: cli_smoke
+message: ValueError: path is on mount 'D:', start on mount 'C:'
+Traceback (most recent call last):
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 136, in run_trial
+    scenario(module)
+    ~~~~~~~~^^^^^^^^
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 27, in run_cli_smoke
+    exit_code = module.main(
+        [
+    ...<10 lines>...
+        stdout=stdout,
+    )
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\artifacts\baseline\benchmark_runner.py", line 150, in main
+    discovered_suite = unittest.defaultTestLoader.discover(start_dir=args.start_dir, pattern=args.pattern)
+  File "C:\Python313\Lib\unittest\loader.py", line 310, in discover
+    tests = list(self._find_tests(start_dir, pattern))
+  File "C:\Python313\Lib\unittest\loader.py", line 349, in _find_tests
+    name = self._get_name_from_path(start_dir)
+  File "C:\Python313\Lib\unittest\loader.py", line 331, in _get_name_from_path
+    _relpath = os.path.relpath(path, self._top_level_dir)
+  File "<frozen ntpath>", line 796, in relpath
+ValueError: path is on mount 'D:', start on mount 'C:'
+
+trial: 5
+scenario: default_loader_isolation
+message: ValueError: path is on mount 'D:', start on mount 'C:'
+Traceback (most recent call last):
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 136, in run_trial
+    scenario(module)
+    ~~~~~~~~^^^^^^^^
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 52, in run_default_loader_isolation
+    exit_code = module.main(
+        [
+    ...<10 lines>...
+        stdout=stdout,
+    )
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\artifacts\baseline\benchmark_runner.py", line 150, in main
+    discovered_suite = unittest.defaultTestLoader.discover(start_dir=args.start_dir, pattern=args.pattern)
+  File "C:\Python313\Lib\unittest\loader.py", line 310, in discover
+    tests = list(self._find_tests(start_dir, pattern))
+  File "C:\Python313\Lib\unittest\loader.py", line 349, in _find_tests
+    name = self._get_name_from_path(start_dir)
+  File "C:\Python313\Lib\unittest\loader.py", line 331, in _get_name_from_path
+    _relpath = os.path.relpath(path, self._top_level_dir)
+  File "<frozen ntpath>", line 796, in relpath
+ValueError: path is on mount 'D:', start on mount 'C:'
+
+trial: 5
+scenario: repeated_temp_fixture
+message: ImportError: Start directory is not importable: 'C:\\Users\\STEVED~1\\AppData\\Local\\Temp\\tmpygg3sjcd\\failure_fixture'
+Traceback (most recent call last):
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 136, in run_trial
+    scenario(module)
+    ~~~~~~~~^^^^^^^^
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 115, in run_repeated_temp_fixture
+    first = _run_temp_failure_fixture(module)
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\measure_benchmark_runner.py", line 96, in _run_temp_failure_fixture
+    exit_code = module.main(
+        [
+    ...<10 lines>...
+        stdout=stdout,
+    )
+  File "D:\GitHub\AI-Scientist\reports\refinement\2026-07-26-harness-refinement\artifacts\baseline\benchmark_runner.py", line 150, in main
+    discovered_suite = unittest.defaultTestLoader.discover(start_dir=args.start_dir, pattern=args.pattern)
+  File "C:\Python313\Lib\unittest\loader.py", line 308, in discover
+    raise ImportError('Start directory is not importable: %r' % start_dir)
+ImportError: Start directory is not importable: 'C:\\Users\\STEVED~1\\AppData\\Local\\Temp\\tmpygg3sjcd\\failure_fixture'

@@ -1,0 +1,113 @@
+{
+  "label": "baseline",
+  "module_path": "D:\\GitHub\\AI-Scientist\\reports\\refinement\\2026-07-26-harness-refinement\\artifacts\\baseline\\benchmark_runner.py",
+  "benchmark_set": [
+    "cli_smoke",
+    "default_loader_isolation",
+    "repeated_temp_fixture"
+  ],
+  "trials": [
+    {
+      "trial": 1,
+      "success": false,
+      "seconds": 0.18285930005367845,
+      "failure_summaries": [
+        {
+          "scenario": "default_loader_isolation",
+          "message": "ValueError: path is on mount 'D:', start on mount 'C:'"
+        },
+        {
+          "scenario": "repeated_temp_fixture",
+          "message": "ImportError: 'test_failure_fixture' module incorrectly imported from 'C:\\\\Users\\\\Steve Digital\\\\AppData\\\\Local\\\\Temp\\\\tmpu593z399\\\\failure_fixture'. Expected 'C:\\\\Users\\\\STEVED~1\\\\AppData\\\\Local\\\\Temp\\\\tmpaof_4yrz\\\\failure_fixture'. Is this module globally installed?"
+        }
+      ]
+    },
+    {
+      "trial": 2,
+      "success": false,
+      "seconds": 0.045577800017781556,
+      "failure_summaries": [
+        {
+          "scenario": "cli_smoke",
+          "message": "ValueError: path is on mount 'D:', start on mount 'C:'"
+        },
+        {
+          "scenario": "default_loader_isolation",
+          "message": "ValueError: path is on mount 'D:', start on mount 'C:'"
+        },
+        {
+          "scenario": "repeated_temp_fixture",
+          "message": "ImportError: Start directory is not importable: 'C:\\\\Users\\\\STEVED~1\\\\AppData\\\\Local\\\\Temp\\\\tmp3uwoegi6\\\\failure_fixture'"
+        }
+      ]
+    },
+    {
+      "trial": 3,
+      "success": false,
+      "seconds": 0.052640500012785196,
+      "failure_summaries": [
+        {
+          "scenario": "cli_smoke",
+          "message": "ValueError: path is on mount 'D:', start on mount 'C:'"
+        },
+        {
+          "scenario": "default_loader_isolation",
+          "message": "ValueError: path is on mount 'D:', start on mount 'C:'"
+        },
+        {
+          "scenario": "repeated_temp_fixture",
+          "message": "ImportError: Start directory is not importable: 'C:\\\\Users\\\\STEVED~1\\\\AppData\\\\Local\\\\Temp\\\\tmppdc0ek48\\\\failure_fixture'"
+        }
+      ]
+    },
+    {
+      "trial": 4,
+      "success": false,
+      "seconds": 0.04691949998959899,
+      "failure_summaries": [
+        {
+          "scenario": "cli_smoke",
+          "message": "ValueError: path is on mount 'D:', start on mount 'C:'"
+        },
+        {
+          "scenario": "default_loader_isolation",
+          "message": "ValueError: path is on mount 'D:', start on mount 'C:'"
+        },
+        {
+          "scenario": "repeated_temp_fixture",
+          "message": "ImportError: Start directory is not importable: 'C:\\\\Users\\\\STEVED~1\\\\AppData\\\\Local\\\\Temp\\\\tmpiyd9ldgn\\\\failure_fixture'"
+        }
+      ]
+    },
+    {
+      "trial": 5,
+      "success": false,
+      "seconds": 0.03231080004479736,
+      "failure_summaries": [
+        {
+          "scenario": "cli_smoke",
+          "message": "ValueError: path is on mount 'D:', start on mount 'C:'"
+        },
+        {
+          "scenario": "default_loader_isolation",
+          "message": "ValueError: path is on mount 'D:', start on mount 'C:'"
+        },
+        {
+          "scenario": "repeated_temp_fixture",
+          "message": "ImportError: Start directory is not importable: 'C:\\\\Users\\\\STEVED~1\\\\AppData\\\\Local\\\\Temp\\\\tmpygg3sjcd\\\\failure_fixture'"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "successful_trials": 0,
+    "failed_trials": 5,
+    "pass_rate": 0.0,
+    "error_rate": 1.0,
+    "avg_seconds": 0.07206158002372831,
+    "median_seconds": 0.04691949998959899,
+    "min_seconds": 0.03231080004479736,
+    "max_seconds": 0.18285930005367845,
+    "throughput_trials_per_second": 13.87702017733613
+  }
+}

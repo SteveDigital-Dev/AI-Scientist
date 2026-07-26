@@ -1,6 +1,7 @@
 import argparse
 import copy
 import hashlib
+import importlib
 import io
 import json
 import math
@@ -100,18 +101,53 @@ def _build_benchmark_config_digest(
     return hashlib.sha256(rendered.encode("utf-8")).hexdigest()
 
 
-def run_once(start_dir: str, pattern: str, discovered_suite=None) -> tuple[bool, float, list[dict[str, str]]]:
+def _discover_suite(start_dir: str, pattern: str) -> tuple[unittest.TestSuite, list[str]]:
+    importlib.invalidate_caches()
+    start_path = Path(start_dir).resolve()
+    modules_before = set(sys.modules)
+    loader = unittest.TestLoader()
+    suite = loader.discover(start_dir=start_dir, pattern=pattern)
+
+    cleanup_modules = []
+    for name in set(sys.modules) - modules_before:
+        module = sys.modules.get(name)
+        module_file = getattr(module, "__file__", None)
+        if not module_file:
+            continue
+        try:
+            module_path = Path(module_file).resolve()
+        except OSError:
+            continue
+        if module_path.is_relative_to(start_path):
+            cleanup_modules.append(name)
+    return suite, cleanup_modules
+
+
+def _cleanup_modules(module_names: list[str]) -> None:
+    for name in module_names:
+        sys.modules.pop(name, None)
+
+
+def run_once(
+    start_dir: str,
+    pattern: str,
+    discovered_suite=None,
+) -> tuple[bool, float, list[dict[str, str]]]:
     start = time.perf_counter()
+    cleanup_modules = []
     if discovered_suite is None:
-        suite = unittest.defaultTestLoader.discover(start_dir=start_dir, pattern=pattern)
+        suite, cleanup_modules = _discover_suite(start_dir, pattern)
     else:
         # Isolate each trial from test-instance mutations while still avoiding re-discovery.
         suite = copy.deepcopy(discovered_suite)
     runner = unittest.TextTestRunner(stream=io.StringIO(), verbosity=0)
-    result = runner.run(suite)
-    seconds = time.perf_counter() - start
-    success = result.wasSuccessful()
-    failure_summaries = _collect_failure_summaries(result)
+    try:
+        result = runner.run(suite)
+        seconds = time.perf_counter() - start
+        success = result.wasSuccessful()
+        failure_summaries = _collect_failure_summaries(result)
+    finally:
+        _cleanup_modules(cleanup_modules)
     return success, seconds, failure_summaries
 
 
@@ -147,8 +183,9 @@ def main(argv: list[str] | None = None, stdout=None) -> int:
 
     discovered_suite = None
     if args.reuse_discovery:
-        discovered_suite = unittest.defaultTestLoader.discover(start_dir=args.start_dir, pattern=args.pattern)
+        discovered_suite, cleanup_modules = _discover_suite(args.start_dir, args.pattern)
         _disable_suite_cleanup(discovered_suite)
+        _cleanup_modules(cleanup_modules)
 
     for _ in range(max(args.warmup, 0)):
         run_once(args.start_dir, args.pattern, discovered_suite)
