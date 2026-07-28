@@ -101,6 +101,11 @@ def _build_benchmark_config_digest(
     return hashlib.sha256(rendered.encode("utf-8")).hexdigest()
 
 
+def _build_result_digest(payload: dict[str, object]) -> str:
+    rendered = json.dumps(payload, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(rendered.encode("utf-8")).hexdigest()
+
+
 def _discover_suite(start_dir: str, pattern: str) -> tuple[unittest.TestSuite, list[str]]:
     importlib.invalidate_caches()
     start_path = Path(start_dir).resolve()
@@ -281,6 +286,9 @@ def main(argv: list[str] | None = None, stdout=None) -> int:
             },
         },
     }
+    result_digest = _build_result_digest(payload)
+    payload["result_digest"] = result_digest
+    payload["summary"]["metadata"]["result_digest"] = result_digest
     rendered = json.dumps(payload, indent=2)
 
     if args.output:

@@ -44,6 +44,7 @@ class BenchmarkRunnerCliTest(unittest.TestCase):
             payload = json.loads(output_path.read_text(encoding="utf-8"))
             self.assertEqual(payload["schema_version"], benchmark_runner.SCHEMA_VERSION)
             self.assertIn("benchmark_config_digest", payload)
+            self.assertIn("result_digest", payload)
             self.assertEqual(payload["pattern"], CLI_SMOKE_PATTERN)
             self.assertEqual(payload["pass_rate"], 1.0)
 
@@ -109,6 +110,15 @@ class BenchmarkRunnerCliTest(unittest.TestCase):
                 reuse_discovery=True,
             ),
         )
+        digest_payload = dict(payload)
+        digest_payload.pop("result_digest")
+        digest_payload["summary"] = dict(payload["summary"])
+        digest_payload["summary"]["metadata"] = dict(payload["summary"]["metadata"])
+        digest_payload["summary"]["metadata"].pop("result_digest")
+        self.assertEqual(
+            payload["result_digest"],
+            benchmark_runner._build_result_digest(digest_payload),
+        )
         self.assertIn("median_seconds", payload)
         self.assertIn("min_seconds", payload)
         self.assertIn("max_seconds", payload)
@@ -130,6 +140,7 @@ class BenchmarkRunnerCliTest(unittest.TestCase):
             payload["summary"]["metadata"]["benchmark_config_digest"],
             payload["benchmark_config_digest"],
         )
+        self.assertEqual(payload["summary"]["metadata"]["result_digest"], payload["result_digest"])
         self.assertEqual(payload["summary"]["reliability"]["successful_trials"], 1)
         self.assertEqual(payload["summary"]["reliability"]["failed_trials"], 0)
         self.assertEqual(payload["summary"]["reliability"]["pass_rate"], payload["pass_rate"])
@@ -221,6 +232,7 @@ class BenchmarkRunnerCliTest(unittest.TestCase):
             payload = json.loads(stdout.getvalue())
             self.assertEqual(payload["schema_version"], benchmark_runner.SCHEMA_VERSION)
             self.assertIn("benchmark_config_digest", payload)
+            self.assertIn("result_digest", payload)
             self.assertEqual(payload["failed_trials"], 1)
             self.assertEqual(payload["trials"][0]["success"], False)
             self.assertIn("failure_summaries", payload["trials"][0])
@@ -242,6 +254,7 @@ class BenchmarkRunnerCliTest(unittest.TestCase):
                 payload["summary"]["metadata"]["benchmark_config_digest"],
                 payload["benchmark_config_digest"],
             )
+            self.assertEqual(payload["summary"]["metadata"]["result_digest"], payload["result_digest"])
             self.assertEqual(payload["summary"]["failures"]["failed_tests"], payload["failed_tests"])
             self.assertEqual(payload["summary"]["failures"]["first_failure"], payload["first_failure"])
             self.assertEqual(payload["summary"]["failures"]["failure_count"], payload["failure_count"])
