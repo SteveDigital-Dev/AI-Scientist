@@ -61,6 +61,7 @@ def _collect_failure_summaries(result: unittest.TestResult) -> list[dict[str, st
 
 def _build_failure_rollup(trials: list[dict[str, object]]) -> dict[str, object]:
     failed_tests = []
+    failed_test_counts = {}
     first_failure = None
     failure_count = 0
 
@@ -70,11 +71,13 @@ def _build_failure_rollup(trials: list[dict[str, object]]) -> dict[str, object]:
             if first_failure is None:
                 first_failure = summary
             test_id = summary["test"]
+            failed_test_counts[test_id] = failed_test_counts.get(test_id, 0) + 1
             if test_id not in failed_tests:
                 failed_tests.append(test_id)
 
     return {
         "failed_tests": failed_tests,
+        "failed_test_counts": failed_test_counts,
         "first_failure": first_failure,
         "failure_count": failure_count,
     }
@@ -259,6 +262,7 @@ def main(argv: list[str] | None = None, stdout=None) -> int:
         "pass_rate": pass_rate,
         "error_rate": error_rate,
         "failed_tests": failure_rollup["failed_tests"],
+        "failed_test_counts": failure_rollup["failed_test_counts"],
         "first_failure": failure_rollup["first_failure"],
         "failure_count": failure_rollup["failure_count"],
         "summary": {

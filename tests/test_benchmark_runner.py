@@ -132,6 +132,7 @@ class BenchmarkRunnerCliTest(unittest.TestCase):
         self.assertEqual(payload["successful_trials"], 1)
         self.assertEqual(payload["failed_trials"], 0)
         self.assertEqual(payload["failed_tests"], [])
+        self.assertEqual(payload["failed_test_counts"], {})
         self.assertIsNone(payload["first_failure"])
         self.assertEqual(payload["failure_count"], 0)
         self.assertIn("summary", payload)
@@ -146,6 +147,7 @@ class BenchmarkRunnerCliTest(unittest.TestCase):
         self.assertEqual(payload["summary"]["reliability"]["pass_rate"], payload["pass_rate"])
         self.assertEqual(payload["summary"]["reliability"]["error_rate"], payload["error_rate"])
         self.assertEqual(payload["summary"]["failures"]["failed_tests"], payload["failed_tests"])
+        self.assertEqual(payload["summary"]["failures"]["failed_test_counts"], payload["failed_test_counts"])
         self.assertEqual(payload["summary"]["failures"]["first_failure"], payload["first_failure"])
         self.assertEqual(payload["summary"]["failures"]["failure_count"], payload["failure_count"])
         self.assertEqual(payload["summary"]["latency_seconds"]["avg"], payload["avg_seconds"])
@@ -247,6 +249,7 @@ class BenchmarkRunnerCliTest(unittest.TestCase):
                 failure_summary["message"],
             )
             self.assertEqual(payload["failed_tests"], [failure_summary["test"]])
+            self.assertEqual(payload["failed_test_counts"], {failure_summary["test"]: 1})
             self.assertEqual(payload["first_failure"], failure_summary)
             self.assertEqual(payload["failure_count"], 1)
             self.assertEqual(payload["summary"]["metadata"]["schema_version"], payload["schema_version"])
@@ -256,6 +259,7 @@ class BenchmarkRunnerCliTest(unittest.TestCase):
             )
             self.assertEqual(payload["summary"]["metadata"]["result_digest"], payload["result_digest"])
             self.assertEqual(payload["summary"]["failures"]["failed_tests"], payload["failed_tests"])
+            self.assertEqual(payload["summary"]["failures"]["failed_test_counts"], payload["failed_test_counts"])
             self.assertEqual(payload["summary"]["failures"]["first_failure"], payload["first_failure"])
             self.assertEqual(payload["summary"]["failures"]["failure_count"], payload["failure_count"])
 
