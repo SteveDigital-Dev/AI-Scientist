@@ -1,0 +1,47 @@
+{
+  "label": "candidate",
+  "module_path": "D:\\GitHub\\AI-Scientist\\tests\\benchmark_runner.py",
+  "benchmark_set": [
+    "cli_smoke",
+    "default_loader_isolation",
+    "repeated_temp_fixture"
+  ],
+  "trials": [
+    {
+      "trial": 1,
+      "success": true,
+      "seconds": 0.15309689997229725
+    },
+    {
+      "trial": 2,
+      "success": true,
+      "seconds": 0.07136570010334253
+    },
+    {
+      "trial": 3,
+      "success": true,
+      "seconds": 0.09726129996124655
+    },
+    {
+      "trial": 4,
+      "success": true,
+      "seconds": 0.06256069999653846
+    },
+    {
+      "trial": 5,
+      "success": true,
+      "seconds": 0.061463600024580956
+    }
+  ],
+  "summary": {
+    "successful_trials": 5,
+    "failed_trials": 0,
+    "pass_rate": 1.0,
+    "error_rate": 0.0,
+    "avg_seconds": 0.08914964001160115,
+    "median_seconds": 0.07136570010334253,
+    "min_seconds": 0.061463600024580956,
+    "max_seconds": 0.15309689997229725,
+    "throughput_trials_per_second": 11.217095210590518
+  }
+}
