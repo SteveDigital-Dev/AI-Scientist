@@ -1,0 +1,83 @@
+{
+  "schema_version": "benchmark-runner.v2",
+  "benchmark_config_digest": "09e3f461a8482f8aff32e152206372f5f0bac2e7e37d9bdc0d3cffc2ca17f12d",
+  "command": "python tests/benchmark_runner.py --start-dir tests --pattern test_benchmark_runner.py --trials 5 --warmup 1 --reuse-discovery",
+  "start_dir": "tests",
+  "pattern": "test_benchmark_runner.py",
+  "reuse_discovery": true,
+  "trials": [
+    {
+      "trial": 1,
+      "success": true,
+      "seconds": 0.40662879997398704
+    },
+    {
+      "trial": 2,
+      "success": true,
+      "seconds": 0.40382829995360225
+    },
+    {
+      "trial": 3,
+      "success": true,
+      "seconds": 0.3737348000286147
+    },
+    {
+      "trial": 4,
+      "success": true,
+      "seconds": 0.38000820006709546
+    },
+    {
+      "trial": 5,
+      "success": true,
+      "seconds": 0.37459980009589344
+    }
+  ],
+  "successful_trials": 5,
+  "failed_trials": 0,
+  "avg_seconds": 0.3877599800238386,
+  "median_seconds": 0.38000820006709546,
+  "stdev_seconds": 0.014451362384276741,
+  "min_seconds": 0.3737348000286147,
+  "max_seconds": 0.40662879997398704,
+  "p95_seconds": 0.40662879997398704,
+  "throughput_trials_per_second": 2.578914925512742,
+  "pass_rate": 1.0,
+  "error_rate": 0.0,
+  "failed_tests": [],
+  "failed_test_counts": {},
+  "failed_test_rates": {},
+  "first_failure": null,
+  "failure_count": 0,
+  "summary": {
+    "metadata": {
+      "schema_version": "benchmark-runner.v2",
+      "benchmark_config_digest": "09e3f461a8482f8aff32e152206372f5f0bac2e7e37d9bdc0d3cffc2ca17f12d",
+      "result_digest": "576549a07108629c6b92a384c1b20ef84a23e8befb13d00766fc91c8a45a127c"
+    },
+    "reliability": {
+      "successful_trials": 5,
+      "failed_trials": 0,
+      "pass_rate": 1.0,
+      "error_rate": 0.0
+    },
+    "failures": {
+      "failed_tests": [],
+      "failed_test_counts": {},
+      "failed_test_rates": {},
+      "first_failure": null,
+      "failure_count": 0
+    },
+    "latency_seconds": {
+      "avg": 0.3877599800238386,
+      "median": 0.38000820006709546,
+      "stdev": 0.014451362384276741,
+      "min": 0.3737348000286147,
+      "max": 0.40662879997398704,
+      "p95": 0.40662879997398704
+    },
+    "throughput": {
+      "trials_per_second": 2.578914925512742
+    }
+  },
+  "result_digest": "576549a07108629c6b92a384c1b20ef84a23e8befb13d00766fc91c8a45a127c"
+}

@@ -134,6 +134,8 @@ class BenchmarkRunnerCliTest(unittest.TestCase):
         self.assertEqual(payload["failed_tests"], [])
         self.assertEqual(payload["failed_test_counts"], {})
         self.assertEqual(payload["failed_test_rates"], {})
+        self.assertEqual(payload["failed_test_first_trials"], {})
+        self.assertEqual(payload["failed_test_last_trials"], {})
         self.assertIsNone(payload["first_failure"])
         self.assertEqual(payload["failure_count"], 0)
         self.assertIn("summary", payload)
@@ -150,6 +152,14 @@ class BenchmarkRunnerCliTest(unittest.TestCase):
         self.assertEqual(payload["summary"]["failures"]["failed_tests"], payload["failed_tests"])
         self.assertEqual(payload["summary"]["failures"]["failed_test_counts"], payload["failed_test_counts"])
         self.assertEqual(payload["summary"]["failures"]["failed_test_rates"], payload["failed_test_rates"])
+        self.assertEqual(
+            payload["summary"]["failures"]["failed_test_first_trials"],
+            payload["failed_test_first_trials"],
+        )
+        self.assertEqual(
+            payload["summary"]["failures"]["failed_test_last_trials"],
+            payload["failed_test_last_trials"],
+        )
         self.assertEqual(payload["summary"]["failures"]["first_failure"], payload["first_failure"])
         self.assertEqual(payload["summary"]["failures"]["failure_count"], payload["failure_count"])
         self.assertEqual(payload["summary"]["latency_seconds"]["avg"], payload["avg_seconds"])
@@ -253,6 +263,8 @@ class BenchmarkRunnerCliTest(unittest.TestCase):
             self.assertEqual(payload["failed_tests"], [failure_summary["test"]])
             self.assertEqual(payload["failed_test_counts"], {failure_summary["test"]: 1})
             self.assertEqual(payload["failed_test_rates"], {failure_summary["test"]: 1.0})
+            self.assertEqual(payload["failed_test_first_trials"], {failure_summary["test"]: 1})
+            self.assertEqual(payload["failed_test_last_trials"], {failure_summary["test"]: 1})
             self.assertEqual(payload["first_failure"], failure_summary)
             self.assertEqual(payload["failure_count"], 1)
             self.assertEqual(payload["summary"]["metadata"]["schema_version"], payload["schema_version"])
@@ -264,6 +276,14 @@ class BenchmarkRunnerCliTest(unittest.TestCase):
             self.assertEqual(payload["summary"]["failures"]["failed_tests"], payload["failed_tests"])
             self.assertEqual(payload["summary"]["failures"]["failed_test_counts"], payload["failed_test_counts"])
             self.assertEqual(payload["summary"]["failures"]["failed_test_rates"], payload["failed_test_rates"])
+            self.assertEqual(
+                payload["summary"]["failures"]["failed_test_first_trials"],
+                payload["failed_test_first_trials"],
+            )
+            self.assertEqual(
+                payload["summary"]["failures"]["failed_test_last_trials"],
+                payload["failed_test_last_trials"],
+            )
             self.assertEqual(payload["summary"]["failures"]["first_failure"], payload["first_failure"])
             self.assertEqual(payload["summary"]["failures"]["failure_count"], payload["failure_count"])
 
@@ -280,6 +300,8 @@ class BenchmarkRunnerCliTest(unittest.TestCase):
         self.assertEqual(failure_rollup["failed_tests"], ["pkg.TestCase.test_flaky"])
         self.assertEqual(failure_rollup["failed_test_counts"], {"pkg.TestCase.test_flaky": 2})
         self.assertEqual(failure_rollup["failed_test_rates"], {"pkg.TestCase.test_flaky": 0.5})
+        self.assertEqual(failure_rollup["failed_test_first_trials"], {"pkg.TestCase.test_flaky": 1})
+        self.assertEqual(failure_rollup["failed_test_last_trials"], {"pkg.TestCase.test_flaky": 3})
         self.assertEqual(failure_rollup["failure_count"], 2)
 
     def test_repeated_temp_fixture_runs_do_not_leak_test_modules(self):

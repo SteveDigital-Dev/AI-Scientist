@@ -1,0 +1,87 @@
+{
+  "schema_version": "benchmark-runner.v3",
+  "benchmark_config_digest": "a55e4f63fabd7a73fa29602e8dc820801ec16c73c864b3eafbba89e1e44fd713",
+  "command": "python tests/benchmark_runner.py --start-dir tests --pattern test_benchmark_runner.py --trials 5 --warmup 1 --reuse-discovery",
+  "start_dir": "tests",
+  "pattern": "test_benchmark_runner.py",
+  "reuse_discovery": true,
+  "trials": [
+    {
+      "trial": 1,
+      "success": true,
+      "seconds": 0.41088829992804676
+    },
+    {
+      "trial": 2,
+      "success": true,
+      "seconds": 0.37569779995828867
+    },
+    {
+      "trial": 3,
+      "success": true,
+      "seconds": 0.37911760003771633
+    },
+    {
+      "trial": 4,
+      "success": true,
+      "seconds": 0.3981637000106275
+    },
+    {
+      "trial": 5,
+      "success": true,
+      "seconds": 0.3738628000719473
+    }
+  ],
+  "successful_trials": 5,
+  "failed_trials": 0,
+  "avg_seconds": 0.3875460400013253,
+  "median_seconds": 0.37911760003771633,
+  "stdev_seconds": 0.014534416051993727,
+  "min_seconds": 0.3738628000719473,
+  "max_seconds": 0.41088829992804676,
+  "p95_seconds": 0.41088829992804676,
+  "throughput_trials_per_second": 2.580338583763055,
+  "pass_rate": 1.0,
+  "error_rate": 0.0,
+  "failed_tests": [],
+  "failed_test_counts": {},
+  "failed_test_rates": {},
+  "failed_test_first_trials": {},
+  "failed_test_last_trials": {},
+  "first_failure": null,
+  "failure_count": 0,
+  "summary": {
+    "metadata": {
+      "schema_version": "benchmark-runner.v3",
+      "benchmark_config_digest": "a55e4f63fabd7a73fa29602e8dc820801ec16c73c864b3eafbba89e1e44fd713",
+      "result_digest": "8782d186764800506e0457b2c1e13312aa7b2c0cc4c85d8c6fbe44dbc95d0d89"
+    },
+    "reliability": {
+      "successful_trials": 5,
+      "failed_trials": 0,
+      "pass_rate": 1.0,
+      "error_rate": 0.0
+    },
+    "failures": {
+      "failed_tests": [],
+      "failed_test_counts": {},
+      "failed_test_rates": {},
+      "failed_test_first_trials": {},
+      "failed_test_last_trials": {},
+      "first_failure": null,
+      "failure_count": 0
+    },
+    "latency_seconds": {
+      "avg": 0.3875460400013253,
+      "median": 0.37911760003771633,
+      "stdev": 0.014534416051993727,
+      "min": 0.3738628000719473,
+      "max": 0.41088829992804676,
+      "p95": 0.41088829992804676
+    },
+    "throughput": {
+      "trials_per_second": 2.580338583763055
+    }
+  },
+  "result_digest": "8782d186764800506e0457b2c1e13312aa7b2c0cc4c85d8c6fbe44dbc95d0d89"
+}

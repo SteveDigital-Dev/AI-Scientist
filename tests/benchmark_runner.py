@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-SCHEMA_VERSION = "benchmark-runner.v2"
+SCHEMA_VERSION = "benchmark-runner.v3"
 
 
 def _disable_suite_cleanup(node) -> None:
@@ -63,16 +63,23 @@ def _build_failure_rollup(trials: list[dict[str, object]]) -> dict[str, object]:
     failed_tests = []
     failed_test_counts = {}
     failed_test_rates = {}
+    failed_test_first_trials = {}
+    failed_test_last_trials = {}
     first_failure = None
     failure_count = 0
 
     for trial in trials:
+        trial_number = trial.get("trial")
         for summary in trial.get("failure_summaries", []):
             failure_count += 1
             if first_failure is None:
                 first_failure = summary
             test_id = summary["test"]
             failed_test_counts[test_id] = failed_test_counts.get(test_id, 0) + 1
+            if trial_number is not None:
+                if test_id not in failed_test_first_trials:
+                    failed_test_first_trials[test_id] = trial_number
+                failed_test_last_trials[test_id] = trial_number
             if test_id not in failed_tests:
                 failed_tests.append(test_id)
 
@@ -84,6 +91,8 @@ def _build_failure_rollup(trials: list[dict[str, object]]) -> dict[str, object]:
         "failed_tests": failed_tests,
         "failed_test_counts": failed_test_counts,
         "failed_test_rates": failed_test_rates,
+        "failed_test_first_trials": failed_test_first_trials,
+        "failed_test_last_trials": failed_test_last_trials,
         "first_failure": first_failure,
         "failure_count": failure_count,
     }
@@ -270,6 +279,8 @@ def main(argv: list[str] | None = None, stdout=None) -> int:
         "failed_tests": failure_rollup["failed_tests"],
         "failed_test_counts": failure_rollup["failed_test_counts"],
         "failed_test_rates": failure_rollup["failed_test_rates"],
+        "failed_test_first_trials": failure_rollup["failed_test_first_trials"],
+        "failed_test_last_trials": failure_rollup["failed_test_last_trials"],
         "first_failure": failure_rollup["first_failure"],
         "failure_count": failure_rollup["failure_count"],
         "summary": {
