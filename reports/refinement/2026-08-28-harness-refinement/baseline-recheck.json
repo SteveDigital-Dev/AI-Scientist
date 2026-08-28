@@ -1,0 +1,72 @@
+{
+  "label": "baseline-recheck",
+  "module_path": "D:\\GitHub\\AI-Scientist\\reports\\refinement\\2026-08-28-harness-refinement\\artifacts\\baseline\\benchmark_runner.py",
+  "benchmark_set": [
+    "cli_smoke",
+    "default_loader_isolation",
+    "repeated_temp_fixture"
+  ],
+  "trials": [
+    {
+      "trial": 1,
+      "success": true,
+      "seconds": 0.13515260000076523
+    },
+    {
+      "trial": 2,
+      "success": true,
+      "seconds": 0.05654250000043248
+    },
+    {
+      "trial": 3,
+      "success": true,
+      "seconds": 0.05261109999992186
+    },
+    {
+      "trial": 4,
+      "success": true,
+      "seconds": 0.0498011999998198
+    },
+    {
+      "trial": 5,
+      "success": true,
+      "seconds": 0.051759999999376305
+    },
+    {
+      "trial": 6,
+      "success": true,
+      "seconds": 0.05822059999991325
+    },
+    {
+      "trial": 7,
+      "success": true,
+      "seconds": 0.04965360000005603
+    },
+    {
+      "trial": 8,
+      "success": true,
+      "seconds": 0.0583598000002894
+    },
+    {
+      "trial": 9,
+      "success": true,
+      "seconds": 0.060996399999567075
+    },
+    {
+      "trial": 10,
+      "success": true,
+      "seconds": 0.05384090000006836
+    }
+  ],
+  "summary": {
+    "successful_trials": 10,
+    "failed_trials": 0,
+    "pass_rate": 1.0,
+    "error_rate": 0.0,
+    "avg_seconds": 0.06269387000002098,
+    "median_seconds": 0.05519170000025042,
+    "min_seconds": 0.04965360000005603,
+    "max_seconds": 0.13515260000076523,
+    "throughput_trials_per_second": 15.950522754452155
+  }
+}

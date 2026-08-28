@@ -1,0 +1,72 @@
+{
+  "label": "candidate-recheck",
+  "module_path": "D:\\GitHub\\AI-Scientist\\tests\\benchmark_runner.py",
+  "benchmark_set": [
+    "cli_smoke",
+    "default_loader_isolation",
+    "repeated_temp_fixture"
+  ],
+  "trials": [
+    {
+      "trial": 1,
+      "success": true,
+      "seconds": 0.1291268000004493
+    },
+    {
+      "trial": 2,
+      "success": true,
+      "seconds": 0.055464199999732955
+    },
+    {
+      "trial": 3,
+      "success": true,
+      "seconds": 0.05818780000026891
+    },
+    {
+      "trial": 4,
+      "success": true,
+      "seconds": 0.05717890000050829
+    },
+    {
+      "trial": 5,
+      "success": true,
+      "seconds": 0.05987619999996241
+    },
+    {
+      "trial": 6,
+      "success": true,
+      "seconds": 0.05940069999996922
+    },
+    {
+      "trial": 7,
+      "success": true,
+      "seconds": 0.054984999999760475
+    },
+    {
+      "trial": 8,
+      "success": true,
+      "seconds": 0.05351020000034623
+    },
+    {
+      "trial": 9,
+      "success": true,
+      "seconds": 0.056789799999933166
+    },
+    {
+      "trial": 10,
+      "success": true,
+      "seconds": 0.0578629000001456
+    }
+  ],
+  "summary": {
+    "successful_trials": 10,
+    "failed_trials": 0,
+    "pass_rate": 1.0,
+    "error_rate": 0.0,
+    "avg_seconds": 0.06423825000010766,
+    "median_seconds": 0.05752090000032695,
+    "min_seconds": 0.05351020000034623,
+    "max_seconds": 0.1291268000004493,
+    "throughput_trials_per_second": 15.56704922687533
+  }
+}

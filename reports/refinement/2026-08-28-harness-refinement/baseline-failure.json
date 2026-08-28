@@ -1,0 +1,121 @@
+{
+  "schema_version": "benchmark-runner.v3",
+  "benchmark_config_digest": "6fca50da80e54fb5f8465ca6bcf581571226848ef0850cb6b3e3cabc05b0a7d2",
+  "command": "python tests/benchmark_runner.py --start-dir reports\\refinement\\2026-08-28-harness-refinement\\failure-fixture --pattern test_failure_fixture.py --trials 3 --warmup 0 --reuse-discovery",
+  "start_dir": "reports\\refinement\\2026-08-28-harness-refinement\\failure-fixture",
+  "pattern": "test_failure_fixture.py",
+  "reuse_discovery": true,
+  "trials": [
+    {
+      "trial": 1,
+      "success": false,
+      "seconds": 0.0021405999996204628,
+      "failure_summaries": [
+        {
+          "test": "test_failure_fixture.FailureFixtureTest.test_expected_failure_signal",
+          "message": "AssertionError: 'baseline' != 'candidate'"
+        }
+      ]
+    },
+    {
+      "trial": 2,
+      "success": false,
+      "seconds": 0.0013550000003306195,
+      "failure_summaries": [
+        {
+          "test": "test_failure_fixture.FailureFixtureTest.test_expected_failure_signal",
+          "message": "AssertionError: 'baseline' != 'candidate'"
+        }
+      ]
+    },
+    {
+      "trial": 3,
+      "success": false,
+      "seconds": 0.0012146999997639796,
+      "failure_summaries": [
+        {
+          "test": "test_failure_fixture.FailureFixtureTest.test_expected_failure_signal",
+          "message": "AssertionError: 'baseline' != 'candidate'"
+        }
+      ]
+    }
+  ],
+  "successful_trials": 0,
+  "failed_trials": 3,
+  "avg_seconds": 0.0015700999999050207,
+  "median_seconds": 0.0013550000003306195,
+  "stdev_seconds": 0.0004074503730895657,
+  "min_seconds": 0.0012146999997639796,
+  "max_seconds": 0.0021405999996204628,
+  "p95_seconds": 0.0021405999996204628,
+  "throughput_trials_per_second": 636.9021081845058,
+  "pass_rate": 0.0,
+  "error_rate": 1.0,
+  "failed_tests": [
+    "test_failure_fixture.FailureFixtureTest.test_expected_failure_signal"
+  ],
+  "failed_test_counts": {
+    "test_failure_fixture.FailureFixtureTest.test_expected_failure_signal": 3
+  },
+  "failed_test_rates": {
+    "test_failure_fixture.FailureFixtureTest.test_expected_failure_signal": 1.0
+  },
+  "failed_test_first_trials": {
+    "test_failure_fixture.FailureFixtureTest.test_expected_failure_signal": 1
+  },
+  "failed_test_last_trials": {
+    "test_failure_fixture.FailureFixtureTest.test_expected_failure_signal": 3
+  },
+  "first_failure": {
+    "test": "test_failure_fixture.FailureFixtureTest.test_expected_failure_signal",
+    "message": "AssertionError: 'baseline' != 'candidate'"
+  },
+  "failure_count": 3,
+  "summary": {
+    "metadata": {
+      "schema_version": "benchmark-runner.v3",
+      "benchmark_config_digest": "6fca50da80e54fb5f8465ca6bcf581571226848ef0850cb6b3e3cabc05b0a7d2",
+      "result_digest": "d057b02a9342be95feb5a9836e0d9051fd84e2e84a788106bbe768f1f117a593"
+    },
+    "reliability": {
+      "successful_trials": 0,
+      "failed_trials": 3,
+      "pass_rate": 0.0,
+      "error_rate": 1.0
+    },
+    "failures": {
+      "failed_tests": [
+        "test_failure_fixture.FailureFixtureTest.test_expected_failure_signal"
+      ],
+      "failed_test_counts": {
+        "test_failure_fixture.FailureFixtureTest.test_expected_failure_signal": 3
+      },
+      "failed_test_rates": {
+        "test_failure_fixture.FailureFixtureTest.test_expected_failure_signal": 1.0
+      },
+      "failed_test_first_trials": {
+        "test_failure_fixture.FailureFixtureTest.test_expected_failure_signal": 1
+      },
+      "failed_test_last_trials": {
+        "test_failure_fixture.FailureFixtureTest.test_expected_failure_signal": 3
+      },
+      "first_failure": {
+        "test": "test_failure_fixture.FailureFixtureTest.test_expected_failure_signal",
+        "message": "AssertionError: 'baseline' != 'candidate'"
+      },
+      "failure_count": 3
+    },
+    "latency_seconds": {
+      "avg": 0.0015700999999050207,
+      "median": 0.0013550000003306195,
+      "stdev": 0.0004074503730895657,
+      "min": 0.0012146999997639796,
+      "max": 0.0021405999996204628,
+      "p95": 0.0021405999996204628
+    },
+    "throughput": {
+      "trials_per_second": 636.9021081845058
+    }
+  },
+  "result_digest": "d057b02a9342be95feb5a9836e0d9051fd84e2e84a788106bbe768f1f117a593"
+}

@@ -63,6 +63,7 @@ def _build_failure_rollup(trials: list[dict[str, object]]) -> dict[str, object]:
     failed_tests = []
     failed_test_counts = {}
     failed_test_rates = {}
+    failed_test_example_messages = {}
     failed_test_first_trials = {}
     failed_test_last_trials = {}
     first_failure = None
@@ -76,6 +77,7 @@ def _build_failure_rollup(trials: list[dict[str, object]]) -> dict[str, object]:
                 first_failure = summary
             test_id = summary["test"]
             failed_test_counts[test_id] = failed_test_counts.get(test_id, 0) + 1
+            failed_test_example_messages.setdefault(test_id, summary["message"])
             if trial_number is not None:
                 if test_id not in failed_test_first_trials:
                     failed_test_first_trials[test_id] = trial_number
@@ -91,6 +93,7 @@ def _build_failure_rollup(trials: list[dict[str, object]]) -> dict[str, object]:
         "failed_tests": failed_tests,
         "failed_test_counts": failed_test_counts,
         "failed_test_rates": failed_test_rates,
+        "failed_test_example_messages": failed_test_example_messages,
         "failed_test_first_trials": failed_test_first_trials,
         "failed_test_last_trials": failed_test_last_trials,
         "first_failure": first_failure,
@@ -279,6 +282,7 @@ def main(argv: list[str] | None = None, stdout=None) -> int:
         "failed_tests": failure_rollup["failed_tests"],
         "failed_test_counts": failure_rollup["failed_test_counts"],
         "failed_test_rates": failure_rollup["failed_test_rates"],
+        "failed_test_example_messages": failure_rollup["failed_test_example_messages"],
         "failed_test_first_trials": failure_rollup["failed_test_first_trials"],
         "failed_test_last_trials": failure_rollup["failed_test_last_trials"],
         "first_failure": failure_rollup["first_failure"],
